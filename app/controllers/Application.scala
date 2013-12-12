@@ -10,6 +10,10 @@ object Application extends Controller {
     Redirect(routes.Application.hackers)
   }
 
+  def register = Action {
+    Ok(views.html.register())
+  }
+  
   def hackers = Action {
     Ok(views.html.hackers())
   }
