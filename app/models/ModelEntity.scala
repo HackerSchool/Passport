@@ -3,17 +3,18 @@ package models
 import anorm._
 import play.api.db.DB
 import play.api.Play.current
+import java.util.UUID
 
 trait ModelEntity {
-  def findByID(id: Int): ModelEntity = {
+  def findByGUID(UUID: UUID): ModelEntity = {
     DB.withConnection { implicit c ⇒
       val query = SQL("""
 		SELECT * 
 		FROM {modelEntityName}
-		WHERE {modelEntityName}_id = {id}
+		WHERE {modelEntityName}_UUID= {UUID}
 	  """).on(
 	    "modelEntityName" -> this.getClass().getSimpleName(),
-        "id" -> id)
+        "UUID" -> UUID)
       val row = query.apply().head
       return null //TODO: change this to create the appropriate ModelEntity type
     }
@@ -34,7 +35,7 @@ trait ModelEntity {
     DB.withConnection { implicit c ⇒
       val query = SQL("""
 		INSERT INTO {modelEntityName}
-	    ({modelEntityName}_id, , ,)
+	    ({modelEntityName}_UUID, , ,)
 		VALUES
         (,,)
         ON DUPLICATE KEY UPDATE
