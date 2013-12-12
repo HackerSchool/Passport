@@ -1,13 +1,19 @@
-@main("Hacker Spaces", 2) {
-	<h3>Find Hacker Space by name</h3>
-	<form class="form" role="form">
-		<div class="input-group">
-			<input type="text" class="form-control" id="hackerSpaceName" placeholder="Name">
-	  		<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+@main("Hacker Spaces", "hackerspaces-link") {
+	<div class="row">
+		<div class="col-lg-12">
+			<h3>Search Hackerspace</h3>
+			<form class="form" role="search">
+				<div class="input-group">
+					<input type="text" class="form-control" id="inputText" placeholder="UUID or Name or Date">
+			  		<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+				</div>
+			</form>
 		</div>
-	</form>
+	</div>
 	
-	<div class="space30"></div>
-	
-	<h3>Most sought after</h3>
+	<div class="row">
+		<div class="col-lg-12">
+			<h3>Most sought after</h3>
+		</div>
+	</div>
 }

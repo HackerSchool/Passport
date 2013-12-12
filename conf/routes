@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                           controllers.Application.index
+GET		/register					controllers.Application.register
 GET     /hackers                    controllers.Application.hackers
 GET     /hackers/:GUID				controllers.Application.showHacker(GUID: String)
 GET     /hackerspaces               controllers.Application.hackerspaces

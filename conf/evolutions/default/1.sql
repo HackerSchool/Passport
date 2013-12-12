@@ -1,7 +1,11 @@
 # --- !Ups
-CREATE TABLE passport.hackers (
-    hacker_UUID                 CHAR(36)        NOT NULL UNIQUE,
-    hacker_photoPath            VARCHAR(255)    NOT NULL,
+CREATE TABLE hackers (
+    hacker_GUID                 CHAR(16)        NOT NULL UNIQUE,
+    hacker_username             VARCHAR(255)    NOT NULL,
+    hacker_salt                 CHAR(512)       NOT NULL,
+    hacker_password_hash        CHAR(512)       NOT NULL,
+    hacker_mail                 VARCHAR(255)    NOT NULL,
+    hacker_photo_path           VARCHAR(255)    NOT NULL,
     hacker_name                 VARCHAR(255)    NOT NULL,
     hacker_dateOfBirth          DATE            NOT NULL,
     hacker_sex                  VARCHAR(6)      NOT NULL,
