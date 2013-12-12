@@ -6,6 +6,7 @@ target
 bin
 tmp
 .history
+.cache
 dist
 /.idea
 /*.iml
