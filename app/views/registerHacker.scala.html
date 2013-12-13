@@ -1,0 +1,63 @@
+@main("Register", "register-link") {
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label for="inputUsername" class="col-sm-2 control-label">Username</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="inputUsername" placeholder="Username">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputName" class="col-sm-2 control-label">Name</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="inputName" placeholder="Name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputPassword" class="col-sm-2 control-label">Password</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="inputPassword" placeholder="Password">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputConfirmPassword" class="col-sm-2 control-label">Confirm Password</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="inputConfirmPassword" placeholder="Password">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+			<div class="col-sm-10">
+				<input type="email" class="form-control" id="inputEmail" placeholder="Email">
+			</div>
+		</div>
+		
+		<link href="@routes.Assets.at("stylesheets/datepicker.css")" rel="stylesheet">
+		<script src="@routes.Assets.at("javascripts/bootstrap-datepicker.js")" type="text/javascript"></script>
+		<div class="form-group">
+			<label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" id="inputBirthday" data-date-format="dd-mm-yyyy" placeholder="Birthday">
+			</div>
+		</div>
+		<script type="text/javascript">
+			$('#inputBirthday').datepicker();
+		</script>
+		<div class="form-group">
+			<label for="inputBirthday" class="col-sm-2 control-label">Sex</label>
+			<div class="col-sm-10 btn-group" data-toggle="buttons">
+				<label class="radio-inline btn btn-default">
+  					<input type="radio" name="sex" id="male" value="male"> Male
+				</label>
+				<label class="radio-inline btn btn-default">
+  					<input type="radio" name="sex" id="female" value="female"> Female
+				</label>
+			</div>
+		</div>		
+		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Register</button>
+			</div>
+		</div>
+	</form>
+}

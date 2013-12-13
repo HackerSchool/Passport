@@ -2,15 +2,29 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
 GET     /                           controllers.Application.index
+
+# Register
+GET		/register/hackerspace		controllers.Application.registerHackerspace
+POST	/register/hackerspace		controllers.Application.newHackerspace
+GET		/register/hacker			controllers.Application.registerHacker
+POST	/register/hacker			controllers.Application.newHacker
 GET		/register					controllers.Application.register
-GET     /hackers                    controllers.Application.hackers
+
+# Hackers
 GET     /hackers/:GUID				controllers.Application.showHacker(GUID: String)
-GET     /hackerspaces               controllers.Application.hackerspaces
+GET     /hackers                    controllers.Application.hackers
+POST    /hackers                    controllers.Application.searchHackers
+
+# Hackerspaces
 GET     /hackerspaces/:GUID			controllers.Application.showHackerSpace(GUID: String)
-GET     /eventsProjects             controllers.Application.eventsProjects
+GET     /hackerspaces               controllers.Application.hackerspaces
+POST    /hackerspaces               controllers.Application.searchHackerspaces
+
+# Event/Projects
 GET     /eventsProjects/:GUID		controllers.Application.showEventsProjects(GUID: String)
+GET     /eventsProjects             controllers.Application.eventsProjects
+POST    /eventsProjects             controllers.Application.searchEventsProjects
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
