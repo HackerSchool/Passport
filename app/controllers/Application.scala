@@ -36,8 +36,8 @@ object Application extends Controller {
 	  "username" -> nonEmptyText,
 	  "name" -> nonEmptyText,
 	  "password" -> tuple(
-        "main" -> text(minLength = 6),
-        "confirm" -> text
+        "main" -> nonEmptyText(minLength = 6),
+        "confirm" -> text(minLength = 6)
       ).verifying("Passwords don't match", passwords => passwords._1 == passwords._2),
 	  "email" -> email,
 	  "birthday" -> date,
