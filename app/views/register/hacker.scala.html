@@ -1,4 +1,22 @@
+@(newHackerForm: Form[controllers.Application.Hacker])
+
+@implicitField = @{ FieldConstructor(views.html.helper.fieldConstructor.f) }
+@import helper._
+
+
 @main("Register", "register-link") {
+	<h3>Register New Hacker by Play</h3>
+	<form class="form-horizontal" role="form" method="POST" action="@routes.Application.newHacker()">
+	    @inputText(newHackerForm("username"), 'class -> "form-control")
+  		@inputText(newHackerForm("name"))
+  		@inputPassword(newHackerForm("password.main"))
+  		@inputPassword(newHackerForm("password.confirm"))
+  		@inputText(newHackerForm("email"))
+  		@inputDate(newHackerForm("birthday"))
+  		@inputText(newHackerForm("sex"))
+	</form>
+	
+	<h3>Register New Hacker</h3>
 	<form class="form-horizontal" role="form">
 		<div class="form-group">
 			<label for="inputUsername" class="col-sm-2 control-label">Username</label>
