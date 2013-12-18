@@ -1,0 +1,51 @@
+@(field: play.api.data.Field, inputType: String, id: String, name: String, value: Option[String], validate: Boolean, htmlArgs: Map[Symbol,Any])(implicit lang: play.api.i18n.Lang)
+
+<input
+	type="@inputType"
+	id="@id"
+	name="@name"
+	
+	@if(htmlArgs.get('class).isEmpty) {
+		class="form-control"
+	}
+	
+	@if(value.isEmpty == false) {
+		value="@value.get"
+	}
+	
+	@if(htmlArgs.get('placeholder).isEmpty && Messages.isDefinedAt(name + ".placeholder")) {
+    	placeholder="@Messages(name + ".placeholder")"
+    }
+    
+	@toHtmlArgs(htmlArgs)>
+ 
+@if(validate && field.constraints.length > 0) {
+	<script type="text/javascript">
+		$(window).load(function(){
+			$("#@id").rules("add", {
+          		@field.constraints.map{ case (restraintName, args) =>
+        			@restraintName match {
+          				case "constraint.required" => { required: true, }
+          				case "constraint.email" => { email: true, }
+          				case _ => { @restraintName.replaceFirst("constraint.", "").toLowerCase(): @args.mkString, }
+          			}
+         		}
+          		messages: {
+          			@field.constraints.map{ case (restraintName, args) =>
+          				@restraintName.replaceFirst("constraint.", "").toLowerCase():
+          				@if(Messages.isDefinedAt(name + "." + restraintName.replaceFirst("constraint.", "error."))){
+          					$.format("@Messages(name + "." + restraintName.replaceFirst("constraint.", "error."))"),
+          				} else {
+          					$.format("@Messages(restraintName.replaceFirst("constraint.", "error."))"),
+          				}
+	        			@*@restraintName match {
+	          				case "constraint.minLength" => { minlength: $.format("@Messages(name + ".constraint.minLength")"),}
+	          				case "constraint.maxLength" => { maxlength: $.format("@Messages(name + ".constraint.maxLength")"),}
+	          				case "constraint.required" => { required: $.format("@Messages(name + "constraint.required")"), }
+	          			}*@
+	         		}
+          		}
+    		});
+		});
+	</script>
+}

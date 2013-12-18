@@ -1,0 +1,49 @@
+@***********************
+ * Generate an HTML form.
+ *
+ * Example:
+ * {{{
+ * @form(action = routes.Users.submit, args = 'class -> "myForm") {
+ *   ...
+ * }
+ * }}}
+ *
+ * @param action The submit action.
+ * @param args Set of extra HTML attributes.
+ * @param body The form body.
+ *@
+@(action: play.api.mvc.Call, validate: Boolean, args: (Symbol,String)*)(body: => Html) 
+
+@randomUUID = @{ java.util.UUID.randomUUID().toString() }
+
+@if(validate) {
+	<script type="text/javascript">
+	   	$.validator.setDefaults({
+	        highlight: function(element) {
+	            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+	        },
+	        unhighlight: function(element) {
+	            $(element).closest('.form-group').removeClass('has-error');
+	        },
+	        errorClass: 'help-block',
+	        errorPlacement: function(error, element) {
+	            element.parent().next().append(error);
+	        },
+	        success: function(label) {
+	        	$(label).closest('.form-group').addClass('has-success');
+			}
+	    });
+	   	$(window).load(function(){
+			$('#@args.toMap.get('id).getOrElse(randomUUID)').validate();
+		});
+	</script>
+}
+
+<form action="@action.url"
+	  method="@action.method"
+	  id="@args.toMap.get('id).getOrElse(randomUUID)"
+	  class="@args.toMap.get('class).getOrElse("form-horizontal")"
+	  role="@args.toMap.get('role).getOrElse("form")"
+	  @toHtmlArgs(args.toMap)>
+    @body
+</form>

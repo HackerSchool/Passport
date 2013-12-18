@@ -1,0 +1,37 @@
+@**
+ * Generate an HTML5 input date.
+ *
+ * Example:
+ * {{{
+ * @inputDate(field = myForm("releaseDate"), args = 'size -> 10)
+ * }}}
+ *
+ * @param field The form field.
+ * @param args Set of extra attributes.
+ * @param handler The field constructor.
+ *@
+@(field: play.api.data.Field, args: (Symbol,Any)*)(implicit handler: views.html.helper.FieldConstructor, lang: play.api.i18n.Lang)
+
+@dateFormat = @{ args.toMap.get('dateFormat).getOrElse("dd-mm-yyyy") }
+ 
+@views.html.helper.input(field, args:_*) { (id, name, value, htmlArgs) =>
+    @**
+     * Be sure to include something like this in the template page making use of this template:
+     *
+     * <link href="@routes.Assets.at("stylesheets/datepicker.css")" rel="stylesheet">
+	 * <script src="@routes.Assets.at("javascripts/bootstrap-datepicker.js")" type="text/javascript"></script>
+	 *
+	 * More info: http://www.eyecon.ro/bootstrap-datepicker/
+	 *@
+	
+	@input(field, "text", id, name, value, true,
+		if (htmlArgs.toMap.get('placeholder).isEmpty) {
+			htmlArgs + ('placeholder -> dateFormat)
+		} else {
+			htmlArgs
+		} + (Symbol("data-date-format") -> dateFormat))
+
+	<script type="text/javascript">
+		$('#@id').datepicker({format: "@dateFormat", weekStart: 1});
+	</script>
+}

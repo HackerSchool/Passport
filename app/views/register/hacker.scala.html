@@ -1,74 +1,30 @@
-@(newHackerForm: Form[controllers.Application.Hacker])
+@(newHackerForm: Form[controllers.Register.HackerDTO])
 
-@import helper._
+@import helper.bootstrap._
 
-@implicitField = @{ FieldConstructor(views.html.helper.bootstrap.fieldConstructor.f) }
+@implicitField = @{ helper.FieldConstructor(views.html.helper.bootstrap.fieldConstructor.f) }
 
-@main("Register", "register-link") {
-	<h3>Register New Hacker by Play</h3>
-	@form(action = routes.Application.newHacker(), 'class -> "form-horizontal", 'role -> "form"){
-	    @inputText(
-	    	newHackerForm("username"),
-	    	'_label -> "Username",
-	    	'placeholder -> "Username",
-	    	'class -> "form-control",
-	    	'onmouseclick -> "validateUsername()")
-  		@inputText(
-  			newHackerForm("name"),
-  			'_label -> "Name",
-  			'placeholder -> "Name",
-	    	'class -> "form-control")
-  		@inputPassword(
-  			newHackerForm("password.main"),
-  			'_label -> "Password",
-  			'placeholder -> "Password",
-	    	'class -> "form-control")
-  		@inputPassword(
-  			newHackerForm("password.confirm"),
-  			'_label -> "Confirm Password",
-  			'placeholder -> "Password",
-	    	'class -> "form-control")
-  		@inputText(
-  			newHackerForm("email"),
-  			'_label -> "Email",
-  			'placeholder -> "Email",
-	    	'class -> "form-control")
-  		@inputDate(newHackerForm("birthday"))
+@scripts = {
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
+    <link href="@routes.Assets.at("stylesheets/datepicker.css")" rel="stylesheet">
+    <script src="@routes.Assets.at("javascripts/bootstrap-datepicker.js")" type="text/javascript"></script>
+}
+
+@main("Register", "register-link", scripts) {		
+	<h3>Register New Hacker</h3>
+	@form(action = routes.Register.newHacker(), true, 'id -> "newHackerForm"){
+	    @inputText(newHackerForm("username"))
+  		@inputText(newHackerForm("name"))
+  		@inputPassword(newHackerForm("password.main"))
+  		@inputPassword(newHackerForm("password.confirm"))
+  		@inputText(newHackerForm("email"))
+  		@inputDate(
+  			newHackerForm("birthday"),
+  			'_label -> "Birthday")
   		@inputRadioGroup(
   			newHackerForm("sex"),
-  			options = Seq("M"->"Male","F"->"Female"),
-  			'_label -> "Sex")
+  			options = Seq("Male", "Female"))
+  		@inputSubmit(
+  			'_label -> "Register")
 	}
-	
-	<h3>Register New Hacker</h3>
-	<form class="form-horizontal" role="form">
-		<link href="@routes.Assets.at("stylesheets/datepicker.css")" rel="stylesheet">
-		<script src="@routes.Assets.at("javascripts/bootstrap-datepicker.js")" type="text/javascript"></script>
-		<div class="form-group">
-			<label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>
-			<div class="col-sm-10">
-				<input type="text" class="form-control" id="inputBirthday" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy">
-			</div>
-		</div>
-		<script type="text/javascript">
-			$('#inputBirthday').datepicker();
-		</script>
-		<div class="form-group">
-			<label for="inputBirthday" class="col-sm-2 control-label">Sex</label>
-			<div class="col-sm-10 btn-group" data-toggle="buttons">
-				<label class="radio-inline btn btn-default">
-  					<input type="radio" name="sex" id="male" value="male"> Male
-				</label>
-				<label class="radio-inline btn btn-default">
-  					<input type="radio" name="sex" id="female" value="female"> Female
-				</label>
-			</div>
-		</div>		
-		
-		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-primary">Register</button>
-			</div>
-		</div>
-	</form>
 }

@@ -3,13 +3,29 @@
 @import play.api.i18n._
 @import views.html.helper._
 
-<div class="form-group @if(elements.hasErrors) {error}">
-	<label for="@elements.id" class="col-sm-2 control-label">@elements.label</label>
-	<div class="col-sm-7">
-		@elements.input
-	</div>
-	<div class="col-sm-3">
-		<span class="errors help-inline">@elements.errors.mkString(", ")</span>
-    	<span class="help help-block">@elements.infos.mkString(", ")</span>
+@hasValue = @{ !elements.field.value.isEmpty && elements.field.value.get != "" }
+
+<div class="form-group @elements.args.get('_class) @if(elements.hasErrors) {has-error} else {@if(hasValue) {has-success}}"
+	 id="@elements.args.get('_id).getOrElse(elements.id + "_field")">
+   	<label for="@elements.id" class="control-label @elements.args.get('_labelClass).getOrElse("col-sm-2")">
+   		@if(elements.args.get('_label).isEmpty && Messages.isDefinedAt(elements.field.name + ".label")(elements.lang)) {
+    		@Messages(elements.field.name + ".label")(elements.lang)
+    	} else { 		
+   			@elements.label
+   		}
+   	</label>
+    
+   	<div class="@elements.args.get('_inputDivClass).getOrElse("col-sm-7")">
+    	@elements.input
+    </div>
+    
+    <div class="@elements.args.get('_infosErrorsDivClass).getOrElse("col-sm-3")">
+    	@if(elements.hasErrors) {
+    		<label for="@elements.id" class="errors help-block">@elements.errors(elements.lang).mkString("; ")</label>
+    	} else {
+    		@if(hasValue == false) {
+    			<label for="@elements.id" class="help help-block">@elements.infos(elements.lang).mkString("; ")</label>
+    		}
+    	}
     </div>
 </div>

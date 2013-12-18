@@ -10,8 +10,10 @@
  * @param args Set of extra attributes.
  * @param handler The field constructor.
  *@
-@(field: play.api.data.Field, args: (Symbol,Any)*)(implicit handler: views.html.helper.FieldConstructor, lang: play.api.i18n.Lang)
+@(args: (Symbol,Any)*)
 
-@views.html.helper.input(field, args:_*) { (id, name, value, htmlArgs) =>
-    @input(field, "text", id, name, value, true, htmlArgs)
-}
+<div class="form-group">
+	<div class="@args.toMap.get('_inputDivClass).getOrElse("col-sm-offset-2 col-sm-10")">
+		<button type="submit" class="btn btn-primary">@args.toMap.get('_label).getOrElse("Submit")</button>
+	</div>
+</div>

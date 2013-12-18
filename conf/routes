@@ -5,11 +5,11 @@
 GET     /                           controllers.Application.index
 
 # Register
-GET		/register/hackerspace		controllers.Application.registerHackerspace
-POST	/register/hackerspace		controllers.Application.newHackerspace
-GET		/register/hacker			controllers.Application.registerHacker
-POST	/register/hacker			controllers.Application.newHacker
-GET		/register					controllers.Application.register
+GET		/register/hackerspace		controllers.Register.hackerspace
+POST	/register/hackerspace		controllers.Register.newHackerspace
+GET		/register/hacker			controllers.Register.hacker
+POST	/register/hacker			controllers.Register.newHacker
+GET		/register					controllers.Register.registerIndex
 
 # Hackers
 GET     /hackers/:GUID				controllers.Application.showHacker(GUID: String)
