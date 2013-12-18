@@ -3,7 +3,7 @@
 @import play.api.i18n._
 @import views.html.helper._
 
-@hasValue = @{ !elements.field.value.isEmpty && elements.field.value.get != "" }
+@hasValue = @{ elements.field.value.isEmpty == false && elements.field.value.get != "" }
 
 <div class="form-group @elements.args.get('_class) @if(elements.hasErrors) {has-error} else {@if(hasValue) {has-success}}"
 	 id="@elements.args.get('_id).getOrElse(elements.id + "_field")">
@@ -19,7 +19,7 @@
     	@elements.input
     </div>
     
-    <div class="@elements.args.get('_infosErrorsDivClass).getOrElse("col-sm-3")">
+    <div class="@elements.args.get('_infosErrorsClass).getOrElse("col-sm-3")">
     	@if(elements.hasErrors) {
     		<label for="@elements.id" class="errors help-block">@elements.errors(elements.lang).mkString("; ")</label>
     	} else {
