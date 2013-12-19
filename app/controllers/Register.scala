@@ -3,6 +3,8 @@ package controllers
 import play.api._
 import play.api.mvc._
 import play.api.data._
+import play.api.data.validation._
+import play.api.data.validation.Constraints._
 import play.api.data.Forms._
 //import models._
 import views._
@@ -41,7 +43,7 @@ object Register extends Controller {
         "main" -> nonEmptyText(minLength = 6),
         "confirm" -> nonEmptyText(minLength = 6)
       ).verifying("Passwords don't match", passwords => passwords._1 == passwords._2),
-	  "email" -> email,
+	  "email" -> email.verifying(nonEmpty),
 	  "birthday" -> date("dd-mm-yyyy"),
 	  "sex" -> nonEmptyText
     ){
@@ -59,10 +61,20 @@ object Register extends Controller {
   def newHacker = Action {implicit request =>
     hackerForm.bindFromRequest.fold(
       // Form has errors, redisplay it
-      errors => BadRequest(html.register.hacker(errors)),
+      errors => BadRequest(html.register.hacker(errors, request.body.toString())),
       
       // We got a valid Hacker value, display the summary
       hacker => Ok(html.register.index())
     )
   }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }

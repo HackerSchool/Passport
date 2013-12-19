@@ -1,4 +1,4 @@
-@(newHackerForm: Form[controllers.Register.HackerDTO])
+@(newHackerForm: Form[controllers.Register.HackerDTO], test: String = "")
 
 @import helper.bootstrap._
 
@@ -11,8 +11,10 @@
 }
 
 @main("Register", "register-link", scripts) {
-    <div class="container">
+	<div class="container">
 		<h3>Register New Hacker</h3>
+		<h1>@test</h1>
+		
 		@form(action = routes.Register.newHacker(), true, 'id -> "newHackerForm"){
 		    @inputText(newHackerForm("username"))
 	  		@inputText(newHackerForm("name"))

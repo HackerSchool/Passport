@@ -32,6 +32,13 @@
 		} + (Symbol("data-date-format") -> dateFormat))
 
 	<script type="text/javascript">
-		$('#@id').datepicker({format: "@dateFormat", weekStart: 1});
+		$(window).load(function(){
+			$('#@id').datepicker({
+				format: "@dateFormat",
+				weekStart: 1
+			}).on('changeDate', function(ev) {
+				$('#@id').datepicker('hide');
+			});
+		});
 	</script>
 }

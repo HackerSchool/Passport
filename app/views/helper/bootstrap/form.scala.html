@@ -44,6 +44,6 @@
 	  id="@args.toMap.get('id).getOrElse(randomUUID)"
 	  class="@args.toMap.get('class).getOrElse("form-horizontal")"
 	  role="@args.toMap.get('role).getOrElse("form")"
-	  @toHtmlArgs(args.toMap)>
+	  @toHtmlArgs(args.filter(arg => arg._1 != 'id && arg._1 != 'class && arg._1 != 'role).toMap)>
     @body
 </form>
