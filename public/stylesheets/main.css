@@ -1,14 +1,9 @@
 body {
-	padding-top: 70px;
+	padding-bottom: 40px;
 }
 
-.container {
-	width: 1170px;
-}
-
-.space20 {
-	height: 20px; 
-}
-.space30 {
-	height: 30px; 
+footer {
+	padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
 }

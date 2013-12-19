@@ -1,3 +1,86 @@
-@main("Welcome to Play") {
+@scripts = {
+    <link href="@routes.Assets.at("stylesheets/index.css")" rel="stylesheet">
+    <script src="/assets/javascripts/holder.js") type="text/javascript"></script>
+}
 
+@main("Passport", "", scripts) {
+<div class="container">
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Hello, hackers!</h1>
+            <p>This Passport is a 100% <b>free</b> and <b>open-source</b> project that will join both <b>hackers</b> and <b>and hackerspaces</b> all over the world in one place.</p>
+            <p><a class="btn btn-lg btn-success" href="#" role="button">Learn more!</a></p>
+        </div>
+    </div>
+    
+    <div class="container marketing">
+        <div class="row">
+            <div class="col-lg-4">
+                <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+	            <h2>Hacker</h2>
+	            <p>You love to learn and create new things out of nowhere? Join this community now and find cool people like you and awesome places to work.</p>
+                <p><a class="btn btn-lg btn-success" href="register/hacker" role="button">
+                    <i class="fa fa-sign-in"> Join now!</i>
+                </a></p>
+            </div><!-- /.col-lg-4 -->
+	        <div class="col-lg-4">
+		        <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+		        <h2>Hackerspace</h2>
+		        <p>Are you in charge of an hackerspace and you want to share with the community of hackers? Feel free to join us and start taking advantage of this Passport.</p>
+		        <p><a class="btn btn-lg btn-success" href="register/hacker" role="button">
+                    <i class="fa fa-sign-in"> Register it!</i>
+                </a></p>
+	        </div><!-- /.col-lg-4 -->
+	        <div class="col-lg-4">
+				<img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+				<h2>Contribute</h2>
+				<p>Passport is a free and open-source project. It is made by the community and for the community. Be welcome to contribute.</p>
+				<p><a class="btn btn-lg btn-success" href="https://github.com/HackerSchool-IST/Passport" role="button">
+                    <i class="fa fa-github-alt"> Fork us!</i>
+                </a></p>
+	        </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+        
+        <!-- START THE FEATURETTES -->
+		<hr class="featurette-divider">
+		
+		<div class="row featurette">
+            <div class="col-md-7">
+				<h2 class="featurette-heading">Events: <span class="text-muted">Keep tracking of your events has never been so easy.</span></h2>
+				<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+			</div>
+			<div class="col-md-5">
+			    <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+            </div>
+		</div>
+		
+		<hr class="featurette-divider">
+		
+		<div class="row featurette">
+			<div class="col-md-5">
+                <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+			</div>
+			<div class="col-md-7">
+				<h2 class="featurette-heading">Memberships: <span class="text-muted">Now you can know where that hackers comes from.</span></h2>
+				<p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+			</div>
+		</div>
+		
+		<hr class="featurette-divider">
+		
+		<div class="row featurette">
+		  <div class="col-md-7">
+		    <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+		    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+		  </div>
+		  <div class="col-md-5">
+		    <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+		  </div>
+		</div>
+		
+		<hr class="featurette-divider">
+		
+		<!-- /END THE FEATURETTES -->
+    </div>
+</div>
 }

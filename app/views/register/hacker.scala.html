@@ -10,21 +10,23 @@
     <script src="@routes.Assets.at("javascripts/bootstrap-datepicker.js")" type="text/javascript"></script>
 }
 
-@main("Register", "register-link", scripts) {		
-	<h3>Register New Hacker</h3>
-	@form(action = routes.Register.newHacker(), true, 'id -> "newHackerForm"){
-	    @inputText(newHackerForm("username"))
-  		@inputText(newHackerForm("name"))
-  		@inputPassword(newHackerForm("password.main"))
-  		@inputPassword(newHackerForm("password.confirm"))
-  		@inputText(newHackerForm("email"))
-  		@inputDate(
-  			newHackerForm("birthday"),
-  			'_label -> "Birthday")
-  		@inputRadioGroup(
-  			newHackerForm("sex"),
-  			options = Seq("Male", "Female"))
-  		@inputSubmit(
-  			'_label -> "Register")
-	}
+@main("Register", "register-link", scripts) {
+    <div class="container">
+		<h3>Register New Hacker</h3>
+		@form(action = routes.Register.newHacker(), true, 'id -> "newHackerForm"){
+		    @inputText(newHackerForm("username"))
+	  		@inputText(newHackerForm("name"))
+	  		@inputPassword(newHackerForm("password.main"))
+	  		@inputPassword(newHackerForm("password.confirm"))
+	  		@inputText(newHackerForm("email"))
+	  		@inputDate(
+	  			newHackerForm("birthday"),
+	  			'_label -> "Birthday")
+	  		@inputRadioGroup(
+	  			newHackerForm("sex"),
+	  			options = Seq("Male", "Female"))
+	  		@inputSubmit(
+	  			'_label -> "Register")
+		}
+	</div>
 }
