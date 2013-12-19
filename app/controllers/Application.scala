@@ -12,7 +12,7 @@ import java.util.Date
 object Application extends Controller {
 
   def index = Action {
-    Redirect(routes.Application.hackers)
+    Ok(html.index())
   }
   
   //Hackers
