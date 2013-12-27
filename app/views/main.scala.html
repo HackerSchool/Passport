@@ -23,6 +23,7 @@
     @scripts
 </head>
 <body>
+    <div id="wrap">
 	<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 		<!-- <img style="float: left; height: 50px; margin-left: 15px;" src="http://upload.wikimedia.org/wikipedia/commons/4/45/Glider.svg"/> -->
 		<div class="container">
@@ -62,13 +63,17 @@
 			<!-- /.navbar-collapse -->
 		</div>
 	</nav>
+	
 	@content
+    </div>
 	
 	<!-- FOOTER -->
-	<footer class="container">
-	   <p class="pull-right"><a href="#">Back to top</a></p>
-	   <p>Proudly made by <a href="www.hackerschool.ist.utl.pt">HackerSchool</a></p>
-    </footer>
+    <div class="footer">
+        <div class="container">
+            <p class="pull-right text-muted credit"><a href="#">Back to top <i class="fa fa-long-arrow-up"></i></a></p>
+            <p class="text-muted credit">Proudly made by <a href="www.hackerschool.ist.utl.pt">HackerSchool</a></p>
+        </div>
+	</div>
 	
 	@if(active != "") {
 		<script type="text/javascript">
