@@ -61,10 +61,10 @@ object Register extends Controller {
   def newHacker = Action {implicit request =>
     hackerForm.bindFromRequest.fold(
       // Form has errors, redisplay it
-      errors => BadRequest(html.register.hacker(errors, request.body.toString())),
+      errors => BadRequest(html.register.hacker(errors)),
       
       // We got a valid Hacker value, display the summary
-      hacker => Ok(html.register.index())
+      hackerDTO => Ok(html.register.index())
     )
   }
   

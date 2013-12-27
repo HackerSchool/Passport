@@ -21,7 +21,7 @@
 
 @if(validate && field.constraints.length > 0) {
 	<script type="text/javascript">
-		$(window).load(function(){
+		$(window).ready(function(){
 			$("#@id").rules("add", {
           		@field.constraints.map{ case (restraintName, args) =>
         			@restraintName match {

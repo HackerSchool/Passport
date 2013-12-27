@@ -20,7 +20,7 @@
 @views.html.helper.input(field, args:_*) { (id, name, value, htmlArgs) =>
 	<div class="btn-group buttonset" id="@id" data-toggle="buttons">
 		@options.map { v =>
-	    	<label for="@(id)_@v" class="radio-inline btn btn-default @(if(value == Some(v)) "active")">
+	    	<label id="@(id)_@(v)_label" for="@(id)_@v" class="radio-inline btn btn-default @(if(value == Some(v)) "active")">
 				@input(field, "radio", id + "_" + v, name, Some(v), true, htmlArgs)
 				
 				@if(Messages.isDefinedAt(name + "." + v)) {
@@ -30,5 +30,13 @@
 				}
 			</label>
 	    }
-	</div>	
+	    <script type="text/javascript">
+			$(window).load(function(){
+				$('#@id label').click(function() {
+					$(this).closest('.form-group').removeClass('has-error').addClass('has-success');
+					$("#@(id)_infosErrorsDiv").hide();
+				});
+			});
+		</script>
+	</div>
 }

@@ -15,11 +15,11 @@
    		}
    	</label>
     
-   	<div class="@elements.args.get('_inputDivClass).getOrElse("col-sm-7")">
+   	<div class="@elements.args.get('_inputDivClass).getOrElse("col-md-5")">
     	@elements.input
     </div>
     
-    <div class="@elements.args.get('_infosErrorsClass).getOrElse("col-sm-3")">
+    <div id="@(elements.id)_infosErrorsDiv"" class="@elements.args.get('_infosErrorsClass).getOrElse("col-md-5")">
     	@if(elements.hasErrors) {
     		<label for="@elements.id" class="errors help-block">@elements.errors(elements.lang).mkString("; ")</label>
     	} else {

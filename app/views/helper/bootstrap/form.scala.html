@@ -9,6 +9,7 @@
  * }}}
  *
  * @param action The submit action.
+ * @param validate Whether or not to use client side form validation
  * @param args Set of extra HTML attributes.
  * @param body The form body.
  *@
@@ -19,6 +20,7 @@
 @if(validate) {
 	<script type="text/javascript">
 	   	$.validator.setDefaults({
+	   		onsubmit: false,
 	        highlight: function(element) {
 	            $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
 	        },
@@ -33,7 +35,7 @@
 	        	$(label).closest('.form-group').addClass('has-success');
 			}
 	    });
-	   	$(window).load(function(){
+	   	$(window).ready(function(){
 			$('#@args.toMap.get('id).getOrElse(randomUUID)').validate();
 		});
 	</script>

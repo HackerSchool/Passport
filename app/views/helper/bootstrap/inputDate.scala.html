@@ -38,6 +38,8 @@
 				weekStart: 1
 			}).on('changeDate', function(ev) {
 				$('#@id').datepicker('hide');
+				$(this).closest('.form-group').removeClass('has-error').addClass('has-success');
+				$("#@(id)_infosErrorsDiv").hide();
 			});
 		});
 	</script>
