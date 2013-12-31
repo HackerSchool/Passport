@@ -14,5 +14,7 @@ case class HackerSpace(var UUID: UUID,
                        var name: String,
                        var location: String,
                        var GPS: String,
-                       var dateFounded: Date) {
+                       var dateFounded: Date,
+                       var URL: String,
+                       var email: String) {
 }
