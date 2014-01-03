@@ -1,3 +1,33 @@
-@main("Register", "register-link") {
-	
+@(newHackerspaceForm: Form[controllers.Register.HackerspaceDTO], test: String = "")
+
+@import helper.bootstrap._
+
+@implicitField = @{ helper.FieldConstructor(views.html.helper.bootstrap.fieldConstructor.f) }
+
+@scripts = {
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
+    <link href="@routes.Assets.at("stylesheets/datepicker.css")" rel="stylesheet">
+    <script src="@routes.Assets.at("javascripts/bootstrap-datepicker.js")" type="text/javascript"></script>
+}
+
+@main("Register", "register-link", scripts) {
+	<div class="container">
+		<h3>Register New Hackerspace</h3>
+		<h1>@test</h1>
+		
+		@form(action = routes.Register.newHackerspace(), true, 'id -> "newHackerspaceForm"){
+		    @inputText(newHackerspaceForm("username"))
+	  		@inputText(newHackerspaceForm("name"))
+	  		@inputPassword(newHackerspaceForm("password.main"))
+	  		@inputPassword(newHackerspaceForm("password.confirm"))
+	  		@inputText(newHackerspaceForm("email"))
+	  		@inputText(newHackerspaceForm("location"))
+	  		@inputText(newHackerspaceForm("GPS"))
+	  		@inputDate(newHackerspaceForm("dateFounded"))
+	  		
+	  		
+	  		@inputSubmit(
+	  			'_label -> "Register")
+		}
+	</div>
 }
