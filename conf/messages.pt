@@ -1,5 +1,3 @@
-# Default messages
-
 username.label=Username
 username.placeholder=Username
 name.label=Name
@@ -16,6 +14,8 @@ error.date=Valid date required
 sex.label=Sex
 sex.Male=Male
 sex.Female=Female
+
+# Default messages
 
 # --- Constraints
 constraint.required=Required
