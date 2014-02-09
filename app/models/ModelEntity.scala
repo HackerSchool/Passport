@@ -6,7 +6,7 @@ import play.api.Play.current
 import java.util.UUID
 
 trait ModelEntity {
-  def findByGUID(UUID: UUID): ModelEntity = {
+  def findByUUID(UUID: UUID): ModelEntity = {
     DB.withConnection { implicit c ⇒
       val query = SQL("""
 		SELECT * 
