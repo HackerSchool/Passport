@@ -4,10 +4,11 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-//import models._
 import views._
-
 import java.util.Date
+import java.util.UUID
+import scala.util.Random
+import pt.ist.fenixframework.FenixFramework
 
 object Application extends Controller {
 
@@ -46,5 +47,17 @@ object Application extends Controller {
   }
   def searchEventsProjects = Action {
     Ok
+  }
+  
+  def getRandomIconName(): String = {
+    val values = List("camera", "trello", "bullhorn", "coffee", "dashboard", "asterisk", "beer", "book", "bug", "crosshairs", "eye", "film", "flag", "flask", "gear", "globe", "gavel", "headphones", "cogs", "puzzle-piece", "magic", "plane", "rss")
+    return values(Random.nextInt(values.size))
+  }
+  
+  
+  def hackerDetail = Action {
+    println(FenixFramework.isInitialized())
+    //val hacker = new Hacker("Simão Martins")
+    Ok("Simao"/*html.hacker.detail(hacker)*/)
   }
 }

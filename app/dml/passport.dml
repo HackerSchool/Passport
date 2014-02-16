@@ -1,0 +1,137 @@
+package models;
+
+class User {
+    String registryEmail;
+    String passwordHash;
+    String salt;
+}
+
+class SocialNetwork {
+    String name;    
+}
+
+class SocialNetworkContact {
+    String contact;
+}
+
+class Hacker {
+	String name;
+	DateTime dateOfBirth;
+    String email;
+	String sex;
+	DateTime dateJoined;
+}
+
+class Hackerspace {
+    String logoUrl;
+    String name;
+    String location;
+    LocalDate dateFounded;
+    String url;
+    String email;
+}
+
+class Project {
+    String name;
+    DateTime beginDate;
+    String url;
+    String logoUrl;
+}
+
+class Connection {
+    DateTime creationDate;
+    DateTime startDate;
+}
+
+    class Hacker2HackerConnection extends Connection {
+    }
+
+        class HackerInspiration extends Hacker2HackerConnection {
+            String inspirationQuote;
+        }
+
+    class Hacker2SpaceConnection extends Connection {
+    }
+        class SpaceFounder extends Hacker2SpaceConnection {
+        }
+        class SpaceVisit extends Hacker2SpaceConnection {
+        }
+        class GuestVisist extends Hacker2SpaceConnection {
+        }
+        class OtherH2SConnection extends Hacker2SpaceConnection {
+        }
+        class SpaceMember extends Hacker2SpaceConnection {
+            DateTime endDate;
+        }
+
+    class Hacker2ProjectConnection extends Connection {
+    }
+        class ProjectParticipant extends Hacker2ProjectConnection{
+        }
+    class Space2SpaceConnection extends Connection {
+    }
+        class SisterSpaces extends Space2SpaceConnection {
+        }
+        class SpaceInspiration extends Space2SpaceConnection {
+            String inspirationQuote;
+        }
+
+    class Hackerspace2ProjectConnection extends Connection {
+    }
+        class ProjectParticipantSpace extends Hackerspace2ProjectConnection{
+        }
+
+relation KnownSocialNetwork {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    SocialNetwork playsRole socialnetworks {multiplicity *;}
+}
+
+relation KnownSocialNetworkContactss {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    SocialNetworkContact playsRole contacts;
+}
+
+relation KnownUsers {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    User playsRole users{ multiplicity *; }
+}
+
+relation KnownHacker {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Hacker playsRole hackers { multiplicity *; }
+}
+
+relation KnownHackerspaces {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Hackerspace playsRole hackerspaces { multiplicity *; }
+}
+
+relation KnownConnections {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Connection playsRole connections { multiplicity *; }
+}
+
+relation KnownProjects {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Project playsRole proejects { multiplicity *; }
+}
+
+relation HackerContacts {
+    Hacker playsRole hacker;
+    SocialNetworkContact playsRole contacts {multiplicity *;}
+}
+
+relation HackerspaceContacts {
+    Hackerspace playsRole hackerspace;
+    SocialNetworkContact playsRole contacts {multiplicity *;}
+}
+
+relation HackersOnProject {
+    Hacker playsRole hackers { multiplicity *;}
+    Project playsRole project;
+}
+
+relation ProjectsOnHackerspace {
+    Project playsRole projects {multiplicity *;} 
+    Hackerspace playsRole hackerspace;
+}

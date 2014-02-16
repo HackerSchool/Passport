@@ -5,7 +5,7 @@
 
 @hasValue = @{ elements.field.value.isEmpty == false && elements.field.value.get != "" }
 
-<div class="form-group @elements.args.get('_class) @if(elements.hasErrors) {has-error} else {@if(hasValue) {has-success}}"
+<div class="@elements.args.get('_class) @if(elements.hasErrors) {has-error} else {@if(hasValue) {has-success}}"
 	 id="@elements.args.get('_id).getOrElse(elements.id + "_field")">
    	<label for="@elements.id" class="control-label @elements.args.get('_labelClass).getOrElse("col-sm-2")">
    		@if(elements.args.get('_label).isEmpty && Messages.isDefinedAt(elements.field.name + ".label")(elements.lang)) {
