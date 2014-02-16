@@ -1,5 +1,201 @@
 package models;
 
+valueType java.security.KeyPair as KeyPair {
+    externalizeWith{
+        bytearray models.core.Externalization.externalizeKeyPair();
+    }
+    internalizeWith models.core.Externalization.internalizeKeyPair();
+}
+
+valueType org.joda.time.Duration as Duration {
+    externalizeWith {
+        Long getMillis();
+    }
+}
+valueType GPS {
+    externalizeWith{
+        String toString();
+    }
+}
+
+class User {
+    String registryEmail;
+    String passwordHash;
+    String salt;
+}
+
+class SocialNetwork {
+    String name;    
+}
+
+class SocialNetworkContact {
+    String contact;
+}
+
 class Hacker {
+	String name;
+	DateTime dateOfBirth;
+    String email;
+	String sex;
+	DateTime dateJoined;
+    KeyPair keys;
+}
+
+class Hackerspace {
+    String logoUrl;
     String name;
+    String location;
+    String GPS;
+    LocalDate dateFounded;
+    String url;
+    String email;
+    KeyPair keys;
+}
+
+class Project {
+    String name;
+    DateTime beginDate;
+    String url;
+    String logoUrl;
+}
+
+class Event {
+    String name;
+    DateTime beginDate;
+    DateTime endDate;
+    String url;
+    String logoUrl;
+}
+
+class Connection {
+    DateTime creationDate;
+    DateTime startDate;
+}
+
+    class Hacker2HackerConnection extends Connection {
+    }
+
+        class HackerInspiration extends Hacker2HackerConnection {
+            String inspirationQuote;
+        }
+
+    class Hacker2SpaceConnection extends Connection {
+    }
+        class SpaceFounder extends Hacker2SpaceConnection {
+        }
+        class SpaceVisit extends Hacker2SpaceConnection {
+            Duration duration;
+        }
+            class GuestVisist extends Hacker2SpaceConnection {
+            }
+        class OtherH2SConnection extends Hacker2SpaceConnection {
+        }
+        class SpaceMember extends Hacker2SpaceConnection {
+            DateTime endDate;
+        }
+
+    class Hacker2ProjectConnection extends Connection {
+    }
+        class ProjectParticipant extends Hacker2ProjectConnection{
+        }
+    class Space2SpaceConnection extends Connection {
+    }
+        class SisterSpaces extends Space2SpaceConnection {
+        }
+        class SpaceInspiration extends Space2SpaceConnection {
+            String inspirationQuote;
+        }
+
+    class Hackerspace2ProjectConnection extends Connection {
+    }
+        class ProjectParticipantSpace extends Hackerspace2ProjectConnection{
+        }
+    class Hacker2EventConnection extends Connection {
+    }
+        class EventParticipant extends Hacker2EventConnection{
+        }
+        class EventGuest extends Hacker2EventConnection {
+        }
+        class EventOrganizer extends Hacker2EventConnection {
+        }
+        
+    class Event2SpaceConnection extends Connection {
+    }
+        class EventOrganizerSpace extends Event2SpaceConnection {
+        }
+        class EventGuestSpace extends Event2SpaceConnection {
+        }
+
+relation KnownSocialNetwork {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    SocialNetwork playsRole socialnetworks {multiplicity *;}
+}
+
+relation KnownSocialNetworkContactss {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    SocialNetworkContact playsRole contacts;
+}
+
+relation KnownUsers {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    User playsRole users{ multiplicity *; }
+}
+
+relation KnownHacker {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Hacker playsRole hackers { multiplicity *; }
+}
+
+relation KnownHackerspaces {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Hackerspace playsRole hackerspaces { multiplicity *; }
+}
+
+relation KnownEvents {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Event playsRole events { multiplicity *; }
+}
+
+relation KnownConnections {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Connection playsRole connections { multiplicity *; }
+}
+
+relation KnownProjects {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Project playsRole proejects { multiplicity *; }
+}
+
+relation HackerContacts {
+    Hacker playsRole hacker;
+    SocialNetworkContact playsRole contacts {multiplicity *;}
+}
+
+relation HackerspaceContacts {
+    Hackerspace playsRole hackerspace;
+    SocialNetworkContact playsRole contacts {multiplicity *;}
+}
+
+relation HackersOnEvent {
+    Hacker playsRole hackers { multiplicity *;}
+    Event playsRole event;
+}
+
+relation HackersOnProject {
+    Hacker playsRole hackers { multiplicity *;}
+    Project playsRole project;
+}
+
+relation HackerspacesOnEvent {
+    Hackerspace playsRole spaces { multiplicity *;}
+    Event playsRole event;
+}
+
+relation ProjectsOnHackerspace {
+    Project playsRole projects {multiplicity *;} 
+    Hackerspace playsRole hackerspace;
+}
+relation HackersOnHackerspace {
+    Hacker playsRole hacker {multiplicity *;}
+    Event playsRole event;
 }
