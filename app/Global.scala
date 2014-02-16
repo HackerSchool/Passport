@@ -16,7 +16,7 @@ object Global extends GlobalSettings {
 	/*FenixFramework.initialize(new JvstmOJBConfig() {
       {
           this.appName = "Passport"
-          this.domainModelURLs = Config.resourceToURLArray("passport.dml")
+          this.domainModelURLs = Config.resourceToURLArray("dml.dml")
           this.dbAlias = "localhost/passportFenix"
           this.dbUsername = "passportFenix"
           this.dbPassword = "passportRootPassword"
