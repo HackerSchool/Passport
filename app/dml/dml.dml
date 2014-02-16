@@ -12,7 +12,7 @@ valueType org.joda.time.Duration as Duration {
         Long getMillis();
     }
 }
-valueType GPS {
+valueType models.GPS as GPS {
     externalizeWith{
         String toString();
     }
@@ -33,11 +33,11 @@ class SocialNetworkContact {
 }
 
 class Hacker {
-	String name;
-	DateTime dateOfBirth;
+    String name;
+    DateTime dateOfBirth;
     String email;
-	String sex;
-	DateTime dateJoined;
+    String sex;
+    DateTime dateJoined;
     KeyPair keys;
 }
 
@@ -45,7 +45,7 @@ class Hackerspace {
     String logoUrl;
     String name;
     String location;
-    String GPS;
+    GPS gps;
     LocalDate dateFounded;
     String url;
     String email;
@@ -86,8 +86,8 @@ class Connection {
         class SpaceVisit extends Hacker2SpaceConnection {
             Duration duration;
         }
-            class GuestVisist extends Hacker2SpaceConnection {
-            }
+        class GuestVisist extends Hacker2SpaceConnection {
+        }
         class OtherH2SConnection extends Hacker2SpaceConnection {
         }
         class SpaceMember extends Hacker2SpaceConnection {
@@ -196,6 +196,6 @@ relation ProjectsOnHackerspace {
     Hackerspace playsRole hackerspace;
 }
 relation HackersOnHackerspace {
-    Hacker playsRole hacker {multiplicity *;}
-    Event playsRole event;
+    Hacker playsRole hackers {multiplicity *;}
+    Hackerspace playsRole hackerspace;
 }
