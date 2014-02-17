@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>@title</title>
+	<title>@if(title != ""){@title - } Passport</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
  	
@@ -23,13 +23,15 @@
     
     <link href="@routes.Assets.at("stylesheets/main.css")" rel="stylesheet">
     
+    <!-- Font -->
+	<link href='http://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel='stylesheet' type='text/css'>
     @scripts
 </head>
 <body>
     <div id="wrap">
-	<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-		<!-- <img style="float: left; height: 50px; margin-left: 15px;" src="http://upload.wikimedia.org/wikipedia/commons/4/45/Glider.svg"/> -->
+	<nav class="navbar navbar-inverse navbar-static-top uppercase heading" role="navigation">
 		<div class="container">
+		<!-- <img style="float: left; height: 50px; margin-left: 15px;" src="http://upload.wikimedia.org/wikipedia/commons/4/45/Glider.svg"/> -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#site-navbar">
 					<span class="sr-only">Toggle navigation</span>
@@ -37,10 +39,13 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">Passport</a>
+				<a class="navbar-brand" href="/"><b>Passport</b></a>
 			</div>
 			<div class="collapse navbar-collapse" id="site-navbar">
 				<ul id="links" class="nav navbar-nav">
+					<li id="about-link">
+						<a href="/about">About</a>
+					</li>
 					<li id="hackers-link">
 						<a href="/hackers">Hackers</a>
 					</li>
@@ -52,12 +57,9 @@
 					</li>
 				</ul>
 			    <ul class="nav navbar-nav navbar-right">
+					<li id="register-link"><a href="/login">Login</a></li>
 					<li id="register-link"><a href="/register">Register</a></li>
 				</ul>
-				<button type="button" class="btn btn-default navbar-btn navbar-right" style="margin-right: 15px;">
-					Log in <span class="glyphicon glyphicon-log-in"></span>
-				</button>
-				
 				<!-- <div class="input-group navbar-form">
 				    <input type="text" class="form-control">
 				    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>

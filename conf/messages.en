@@ -1,3 +1,21 @@
+username.label=Username
+username.placeholder=Username
+name.label=Name
+name.placeholder=Name
+password.placeholder=Password
+password.main.label=Password
+password.main.placeholder=Password
+password.confirm.label=Confirm Password
+password.confirm.placeholder=Password
+email.label=Email
+email.placeholder=user@domain.com
+birthday.label=Birthday
+birthday.error.date=Valid date required
+error.date=Valid date required
+sex.label=Sex
+sex.Male=Male
+sex.Female=Female
+
 # Default messages
 
 # --- Constraints

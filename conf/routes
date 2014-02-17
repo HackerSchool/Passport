@@ -4,12 +4,19 @@
 
 GET     /                           controllers.Application.index
 
+# Login
+GET		/login						controllers.Login.index
+POST	/login						controllers.Login.submit
+
 # Register
 GET		/register/hackerspace		controllers.Register.hackerspace
 POST	/register/hackerspace		controllers.Register.newHackerspace
 GET		/register/hacker			controllers.Register.hacker
 POST	/register/hacker			controllers.Register.newHacker
 GET		/register					controllers.Register.registerIndex
+
+# About
+GET		/about						controllers.Application.about
 
 # Hackers
 GET     /hackers/:GUID				controllers.Application.showHacker(GUID: String)

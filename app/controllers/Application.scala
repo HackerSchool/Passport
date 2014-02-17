@@ -48,6 +48,11 @@ object Application extends Controller {
   def searchEventsProjects = Action {
     Ok
   }
+
+  //About
+  def about = Action {
+    Ok(html.about())
+  }
   
   def getRandomIconName(): String = {
     val values = List("camera", "trello", "bullhorn", "coffee", "dashboard", "asterisk", "beer", "book", "bug", "crosshairs", "eye", "film", "flag", "flask", "gear", "globe", "gavel", "headphones", "cogs", "puzzle-piece", "magic", "plane", "rss")
