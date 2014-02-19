@@ -1,5 +1,10 @@
 html, body {
+	font-family: 'Quicksand', sans-serif !important;
     height: 100%;
+}
+
+.navbar-brand {
+	color: white !important;
 }
 
 .footer {
@@ -8,7 +13,6 @@ html, body {
 }
 
 .container {
-	width: auto;
 	max-width: 1170px;
 	padding: 0 15px;
 }
@@ -61,4 +65,35 @@ html, body {
 #membershipDetails .year {
 	font-size: 11px;
 	font-style: italic;
+<<<<<<< HEAD
 }
+
+.text-shadow {
+	text-shadow: 0 1px 1px rgba(0,0,0,.5);
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.heading {
+	font-family: 'Quicksand', sans-serif;
+}
+.centered {
+	text-align: center!important;
+}
+
+.form-control:focus{
+	border-color: rgba(76,174,76,.8);
+	outline: 0;
+	outline: thin dotted \9;
+	-moz-box-shadow: 0 0 8px rgba(76,174,76,.6);
+	box-shadow: 0 0 8px rgba(76,174,76,.6) !important;
+}
+
+.btn-link, .btn-link:hover {
+	color: #4cae4c;
+}
+=======
+}
+>>>>>>> branch 'development' of git@github.com:HackerSchool-IST/Passport.git
