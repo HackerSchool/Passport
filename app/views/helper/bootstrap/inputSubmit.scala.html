@@ -13,7 +13,7 @@
 @(args: (Symbol,Any)*)
 
 <div class="form-group">
-	<div class="@args.toMap.get('_inputDivClass).getOrElse("col-sm-offset-2 col-sm-10")">
-		<button type="submit" class="btn btn-primary">@args.toMap.get('_label).getOrElse("Submit")</button>
+	<div class="@args.toMap.get('_inputDivClass)">
+		<button type="submit" class="@args.toMap.get('_class)">@args.toMap.get('_label).getOrElse("Submit")</button>
 	</div>
 </div>
