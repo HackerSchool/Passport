@@ -7,9 +7,21 @@ html, body {
 	color: white !important;
 }
 
+.footer a {
+	color: #4cae4c !important;
+}
+
 .footer {
 	height: 60px;
 	background-color: #f5f5f5;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
+	background-color: #4cae4c;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+	color: #4cae4c;
 }
 
 .container {
@@ -27,7 +39,6 @@ html, body {
     margin: 0 auto -60px;
     padding: 0 0 60px;
 }
-
 
 #hackerDetail .hackerPhoto {
 	background: #f2f6f8; /* Old browsers */
@@ -65,7 +76,6 @@ html, body {
 #membershipDetails .year {
 	font-size: 11px;
 	font-style: italic;
-<<<<<<< HEAD
 }
 
 .text-shadow {
@@ -79,6 +89,7 @@ html, body {
 .heading {
 	font-family: 'Quicksand', sans-serif;
 }
+
 .centered {
 	text-align: center!important;
 }
@@ -91,9 +102,18 @@ html, body {
 	box-shadow: 0 0 8px rgba(76,174,76,.6) !important;
 }
 
+.has-error .form-control:focus{
+	border-color: rgba(169, 68, 66,.8);
+	outline: 0;
+	outline: thin dotted \9;
+	-moz-box-shadow: 0 0 8px rgba(169, 68, 66,.6);
+	box-shadow: 0 0 8px rgba(169, 68, 66,.6) !important;
+}
+
 .btn-link, .btn-link:hover {
 	color: #4cae4c;
 }
-=======
+
+.featurette-divider {
+	border-top: 1px solid rgba(76,174,76,.6) !important;
 }
->>>>>>> branch 'development' of git@github.com:HackerSchool-IST/Passport.git
