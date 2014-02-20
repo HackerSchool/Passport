@@ -126,11 +126,11 @@ relation PartiesPassportInstance {
 }
 
 relation ChildParty {
-    connection.Connection playsRole connections {multiplicity *;}
+    connection.Connection playsRole parents {multiplicity *;}
     Party playsRole child;
 }
 
 relation ParentParty {
-    connection.Connection playsRole connections {multiplicity *;}
+    connection.Connection playsRole childs {multiplicity *;}
     Party playsRole parent;
 }
