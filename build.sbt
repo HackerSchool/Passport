@@ -35,9 +35,8 @@ sourceGenerators in Compile <+= Def.task[Seq[File]]{
 	  val cachedFun = FileFunction.cached(cacheDirectory.value / dmlFile.getName, FilesInfo.lastModified, FilesInfo.exists) { (inFiles: Set[File]) =>
 			import java.net.URL
 		  import java.util.{ArrayList, HashMap}
-		  import pt.ist.fenixframework.dml.CompilerArgs
 		  import scala.collection.JavaConverters._
-		  val compileArgs = new CompilerArgs(
+		  val compileArgs = new pt.ist.fenixframework.dml.CompilerArgs(
 		    name.value,
 		    destDirectory.value,
 		    destDirectoryBase.value,
@@ -55,11 +54,11 @@ sourceGenerators in Compile <+= Def.task[Seq[File]]{
     }
     generatedFiles = generatedFiles ++ cachedFun(Set(dmlFile)).toSeq
   }
-  //Deletes the non base files since they were generated for Java
   val localNonBaseFilesFileFilter = (destDirectoryBase.value ** "*_Base.java") --- (destDirectoryBase.value / "pt" / "ist" / "fenixframework" ** "*.java")
   val localNonBaseFiles = localNonBaseFilesFileFilter.get.map{f =>
   	val filePath: String = f.getAbsolutePath.replace(destDirectoryBase.value.getAbsolutePath, "").replace("_Base.java", ".java")
     val nonBaseFile = (destDirectory.value / filePath).getAbsoluteFile
+    //Deletes the non base files since they were generated for Java
     //IO.delete(nonBaseFile)
     nonBaseFile
   }
@@ -119,13 +118,10 @@ postProcessDomainClassesAndAtomicAnnotations := {
     import scala.Console._
     println("[" + WHITE + BOLD + "Fenix-Framework" + RESET + "] Ran the FullPostProcessDomainClasses")
     import pt.ist.esw.advice.ProcessAnnotations;
-    import pt.ist.fenixframework.Atomic;
-    import pt.ist.fenixframework.atomic.AtomicContextFactory;
-    //For this to work the line that sets the ContextClassLoader must have been executed
     new ProcessAnnotations(
       new ProcessAnnotations.ProgramArgs(
-        classOf[Atomic],
-        classOf[AtomicContextFactory],
+        classOf[pt.ist.fenixframework.Atomic],
+        classOf[pt.ist.fenixframework.atomic.AtomicContextFactory],
         (classDirectory in Compile).value
       )
     ).process()
