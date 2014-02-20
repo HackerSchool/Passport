@@ -22,7 +22,7 @@ object Login extends Controller {
 	Ok(html.login.index(loginForm))
   }
   
-  def loginSubmit = Action {implicit request => 
+  def submit = Action {implicit request => 
 	loginForm.bindFromRequest.fold(
 		errors => BadRequest(html.login.index(errors)),
 		UserDTO => Redirect(routes.Application.index)

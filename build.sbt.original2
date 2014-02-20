@@ -8,6 +8,8 @@ libraryDependencies ++= Seq(
   cache
 )
 
+play.Project.playScalaSettings
+
 val destDirectory = settingKey[File]("The top level directory where to generate the non-base classes.")
 
 val destDirectoryBase = settingKey[File]("The top level directory where to generate the base classes.")
@@ -56,14 +58,11 @@ sourceGenerators in Compile <+= Def.task[Seq[File]]{
     generatedFiles = generatedFiles ++ cachedFun(Set(dmlFile)).toSeq
   }
   //Deletes the non base files since they were generated for Java
-  val localNonBaseFilesFileFilter = (destDirectoryBase.value ** "*_Base.java") --- (destDirectoryBase.value / "pt" / "ist" / "fenixframework" ** "*.java")
-  val localNonBaseFiles = localNonBaseFilesFileFilter.get.map{f =>
-  	val filePath: String = f.getAbsolutePath.replace(destDirectoryBase.value.getAbsolutePath, "").replace("_Base.java", ".java")
-    val nonBaseFile = (destDirectory.value / filePath).getAbsoluteFile
-    //IO.delete(nonBaseFile)
-    nonBaseFile
-  }
-  generatedFiles ++ localNonBaseFiles
+  /*(destDirectoryBase.value ** "*_Base.java").get.map{f =>
+    val nonBaseFile = destDirectory.value / f.getAbsolutePath.replace(destDirectoryBase.value.getAbsolutePath, "").replace("_Base.java", ".java")
+    IO.delete(nonBaseFile)
+  }*/
+  generatedFiles
 }
 
 lazy val getURLsOfDMLFilesInTheDependentJars = TaskKey[Seq[java.net.URL]]("getURLsOfDMLFilesInTheDependentJars","prints stuff")
@@ -73,9 +72,9 @@ getURLsOfDMLFilesInTheDependentJars := {
   import java.io.FileInputStream
   import java.net.URL
   var urlsToTheDMLFiles = Seq[URL]()
-  val dependentJars: Seq[File] = (dependencyClasspath in Compile).value.files
-  for (jarFile <- dependentJars if jarFile.getName.startsWith("fenix-framework")) {
-    val jarInputStream = new JarInputStream(new FileInputStream(jarFile));
+  val cp: Seq[File] = (dependencyClasspath in Compile).value.files
+  for (f <- cp if f.getName.startsWith("fenix-framework")) {
+    val jarInputStream = new JarInputStream(new FileInputStream(f));
     var jarEntry = jarInputStream.getNextJarEntry
     while (jarEntry != null) {
       if (jarEntry.getName.endsWith(".dml")) {
@@ -94,21 +93,10 @@ unmanagedResourceDirectories in Compile += dmlsDirectory.value
 
 unmanagedResourceDirectories in Runtime += dmlsDirectory.value
 
-managedClasspath in Runtime += (classDirectory in Compile).value
-
 lazy val postProcessDomainClassesAndAtomicAnnotations = TaskKey[Unit]("postProcessDomainClassesAndAtomicAnnotations","Full Post Process Domain Classes")
 
 postProcessDomainClassesAndAtomicAnnotations := {
   val _ = (exportedProducts in Compile).value
-  /*val r = (runner in Runtime).value
-  r.run(
-    "FenixFrameworkInstrumenter",
-    (fullClasspath in Runtime).value.files,
-    Array(
-      name.value,
-      (classDirectory in Compile).value.getAbsolutePath
-    ),
-    streams.value.log)*/
   //https://github.com/fenix-framework/fenix-framework/blob/develop/core/dml-compiler/dml/src/main/java/pt/ist/fenixframework/core/Project.java
   //https://github.com/fenix-framework/fenix-framework/blob/develop/maven/dml-maven-plugin/src/main/java/pt/ist/fenixframework/dml/maven/DmlPostProcessorMojo.java
   //https://github.com/fenix-framework/fenix-framework/blob/develop/maven/dml-maven-plugin/src/main/java/pt/ist/fenixframework/dml/maven/AbstractDmlPostProcessorMojo.java
@@ -132,5 +120,3 @@ postProcessDomainClassesAndAtomicAnnotations := {
     println("[" + WHITE + BOLD + "Fenix-Framework" + RESET + "] Ran the ProcessAtomicAnnotations")
   }
 }
-
-play.Project.playScalaSettings

@@ -61,7 +61,7 @@ object Application extends Controller {
   
   
   def hackerDetail = Action {
-    println(FenixFramework.isInitialized())
+    //println(FenixFramework.isInitialized())
     //val hacker = new Hacker("Simão Martins")
     Ok("Simao"/*html.hacker.detail(hacker)*/)
   }
