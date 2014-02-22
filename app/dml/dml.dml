@@ -1,5 +1,7 @@
 package models;
 
+enum models.connection.ConnectionState as ConnectionState;
+
 valueType java.security.KeyPair as KeyPair {
     externalizeWith{
         bytearray models.core.Externalization.externalizeKeyPair();
@@ -27,22 +29,22 @@ class PassportInstance {
 
 class User {
     String registryEmail;
+    String username;
     String passwordHash;
     String salt;
 }
 
 class Party {
     String rri;
+    String fullname;    
 }
 
     class SocialNetwork extends Party {
-        String name;    
     }
 
     class Hacker extends Party {
-        String name;
+        String hackername;
         DateTime dateOfBirth;
-        String email;
         String sex;
         DateTime dateJoined;
         KeyPair keys;
@@ -50,32 +52,26 @@ class Party {
 
     class Hackerspace extends Party {
         String logoUrl;
-        String name;
         String location;
         GPS gps;
         LocalDate dateFounded;
-        String url;
-        String email;
         KeyPair keys;
     }
 
     class Project extends Party{
-        String name;
         DateTime beginDate;
-        String url;
         String logoUrl;
     }
 
     class Event extends Party{
-        String name;
         DateTime beginDate;
         DateTime endDate;
-        String url;
         String logoUrl;
     }
 
 
 class connection.Connection {
+    ConnectionState state;
     DateTime creationDate;
     DateTime startDate;
     String rri;
