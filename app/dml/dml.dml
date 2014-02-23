@@ -91,7 +91,7 @@ relation KnownUsers {
 
 relation KnownParties {
     .pt.ist.fenixframework.DomainRoot playsRole root;
-    Party playsRole hackers { multiplicity *; }
+    Party playsRole parties { multiplicity *; }
 }
 
 relation KnownPassportInstances {
