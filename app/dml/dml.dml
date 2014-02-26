@@ -28,10 +28,10 @@ class PassportInstance {
 }
 
 class User {
-    String registryEmail;
     String username;
-    String passwordHash;
-    String salt;
+    String registryEmail;
+    bytearray password;
+    bytearray salt;
 }
 
 class Party {
