@@ -59,10 +59,11 @@ sourceGenerators in Compile <+= Def.task[Seq[File]]{
   	val filePath: String = f.getAbsolutePath.replace(destDirectoryBase.value.getAbsolutePath, "").replace("_Base.java", ".java")
     val nonBaseFile = (destDirectory.value / filePath).getAbsoluteFile
     //Deletes the non base files since they were generated for Java
-    //IO.delete(nonBaseFile)
-    nonBaseFile
+    println(nonBaseFile.getAbsolutePath)
+    IO.delete(nonBaseFile)
+//    nonBaseFile
   }
-  generatedFiles ++ localNonBaseFiles
+  generatedFiles // ++ localNonBaseFiles
 }
 
 lazy val getURLsOfDMLFilesInTheDependentJars = TaskKey[Seq[java.net.URL]]("getURLsOfDMLFilesInTheDependentJars","prints stuff")
