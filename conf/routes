@@ -29,6 +29,12 @@ GET     /hackerspaces/:GUID			controllers.Application.showHackerSpace(GUID: Stri
 GET     /hackerspaces               controllers.Application.hackerspaces
 POST    /hackerspaces               controllers.Application.searchHackerspaces
 
+# SocialNetworks
+GET     /socialNetworkCreate        controllers.SocialNetworkManager.createForm
+GET	     /socialNetworkEdit       controllers.SocialNetworkManager.editForm
+POST     /socialNetworkCreate       controllers.SocialNetworkManager.create
+
+
 # Event/Projects
 GET     /eventsProjects/:GUID		controllers.Application.showEventsProjects(GUID: String)
 GET     /eventsProjects             controllers.Application.eventsProjects

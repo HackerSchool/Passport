@@ -1,4 +1,4 @@
 package models
 
-class SocialNetwork extends SocialNetwork_Base {
+class SocialNetwork(fullname: String, url: String) extends SocialNetwork_Base {
 }
