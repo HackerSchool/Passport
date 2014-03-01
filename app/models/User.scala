@@ -1,30 +1,27 @@
 package models
 
 import models.core.security.PasswordEncryption
+import pt.ist.fenixframework.FenixFramework
 
-class User(var username: String, var registryEmail: String, val password: String) extends User_Base {
-
-  this.setUsername(username)
-  this.setRegistryEmail(registryEmail)
-  this.password_=(password)
-  this.salt()
+class User(private val _username: String, private val _registryEmail: String, private val _password: String) extends User_Base {
+  this.setRoot(FenixFramework.getDomainRoot)
+  this.setUsername(_username)
+  this.setRegistryEmail(_registryEmail)
+  this.setSalt(generateSalt)
+  this.setPassword(_password)
   
-  def password_=(password: String) = {
-    setPassword(PasswordEncryption.getEncryptedPassword(password, getSalt()))
+  override def setPassword(password: String): Unit = {
+    super.setPassword(PasswordEncryption.getEncryptedPassword(_password, getSalt()))
   }
   
-  def salt() = {
-    if (getSalt().isEmpty) {
-      setSalt(PasswordEncryption.generateSalt())
+  private def generateSalt() : String = {
+    PasswordEncryption.generateSalt()
+  }
+  
+  override protected def setSalt(salt: String): Unit = {
+    if (getSalt() == null) {
+      super.setSalt(salt)
     }
-  }
-
-  override protected def setPassword(password: Array[Byte]): Unit = {
-    super.setPassword(password)
-  }
-  
-  override protected def setSalt(salt: Array[Byte]): Unit = {
-    super.setSalt(salt)
   }
   
   def authenticate(password: String): Boolean = {

@@ -9,27 +9,27 @@ object PasswordEncryption {
 
   @throws[NoSuchAlgorithmException]("if the algorithm doesn't exists")
   @throws[InvalidKeySpecException]
-  def authenticate(attempedPassword: String, encryptedPassword: Array[Byte], salt: Array[Byte]): Boolean = {
-    val encryptedAttempedPassword: Array[Byte] = getEncryptedPassword(attempedPassword, salt)
-    encryptedPassword.sameElements(encryptedAttempedPassword)
+  def authenticate(attempedPassword: String, encryptedPassword: String, salt: String): Boolean = {
+    val encryptedAttempedPassword: String = getEncryptedPassword(attempedPassword, salt)
+    encryptedPassword == encryptedAttempedPassword
   }
 
   @throws[NoSuchAlgorithmException]("if the algorithm doesn't exists")
   @throws[InvalidKeySpecException]
-  def getEncryptedPassword(password: String, salt: Array[Byte], algorithm: String = "PBKDF2WithHmacSHA1"): Array[Byte] = {
+  def getEncryptedPassword(password: String, salt: String, algorithm: String = "PBKDF2WithHmacSHA1"): String = {
     val derivedKeyLength: Int = 160
     val iterations: Int = 50000
-    val spec: KeySpec = new PBEKeySpec(password.toCharArray(), salt, iterations, derivedKeyLength)
+    val spec: KeySpec = new PBEKeySpec(password.toCharArray(), salt.grouped(2).map(Integer.parseInt(_, 16).toByte).toArray, iterations, derivedKeyLength)
     val factory: SecretKeyFactory = SecretKeyFactory.getInstance(algorithm)
-    factory.generateSecret(spec).getEncoded
+    factory.generateSecret(spec).getEncoded.mkString
   }
 
   @throws[NoSuchAlgorithmException]
-  def generateSalt(instance: String = "SHA1PRNG", saltSize: Int = 16): Array[Byte] = {
+  def generateSalt(instance: String = "SHA1PRNG", saltSize: Int = 16): String = {
     val random: SecureRandom = SecureRandom.getInstance(instance)
     val salt: Array[Byte] = Array.ofDim[Byte](saltSize)
     random.nextBytes(salt)
-    return salt
+    return salt.map("%02X" format _).mkString
   }
 
 }

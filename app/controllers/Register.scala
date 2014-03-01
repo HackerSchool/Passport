@@ -104,14 +104,4 @@ object Register extends Controller {
       hackerDTO => Ok(html.register.index())
     )
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 }
