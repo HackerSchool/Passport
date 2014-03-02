@@ -2,9 +2,11 @@ package models.connection;
 
 import org.joda.time.DateTime
 import exception.InvalidConnectionException
+import pt.ist.fenixframework.FenixFramework
 
 abstract class Connection extends Connection_Base {
   
+  setRoot(FenixFramework.getDomainRoot())
   setCreationDate(new DateTime())
   setState(ConnectionState.UNINIALIZED)
  

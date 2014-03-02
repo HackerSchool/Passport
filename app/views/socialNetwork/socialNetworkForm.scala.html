@@ -16,6 +16,8 @@
 		@form(action = routes.SocialNetworkManager.create(), true, 'id -> "socialNetworkForm"){
 		    @inputText(socialNetworkForm("fullname"))
 	  		@inputText(socialNetworkForm("url"))
+
+	  		@inputHidden(socialNetworkForm("id"))
 			@inputSubmit(
 	  		   '_label -> "Register")
 		}
