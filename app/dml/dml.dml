@@ -14,6 +14,7 @@ valueType org.joda.time.Duration as Duration {
         Long getMillis();
     }
 }
+
 valueType models.GPS as GPS {
     externalizeWith{
         String toString();
@@ -28,9 +29,9 @@ class PassportInstance {
 }
 
 class User {
-    String registryEmail;
     String username;
-    String passwordHash;
+    String registryEmail;
+    String password;
     String salt;
 }
 

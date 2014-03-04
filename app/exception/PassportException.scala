@@ -1,6 +1,6 @@
 package exception
 
-class PassportException(context: String, description: String = "") extends RuntimeException {
+case class PassportException(val context: String, var description: String = "") extends RuntimeException {
 
   override def getMessage: String = {
     "[" + context + "]: " + description

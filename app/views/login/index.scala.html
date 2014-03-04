@@ -1,4 +1,4 @@
-@(loginForm: Form[controllers.Login.UserDTO])
+@(loginForm: Form[controllers.Login.UserLoginDTO], error: String = "")
 
 @import helper.bootstrap._
 
@@ -20,6 +20,12 @@
 </head>
 <body>
 	<div class="container">
+		@if(error != ""){
+		<div class="alert alert-danger alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<b>Oh snap! @error</b>
+		</div>
+		}
 		<h2 class="form-signin-heading">Speak "friend" and enter.</h2>
 		@form(action = routes.Login.submit(), true, 'class -> "form-signin", 'id -> "loginForm"){
 			@inputText(loginForm("username"), '_labelClass -> "hide", '_infosErrorsClass -> "hide")
@@ -27,6 +33,7 @@
 			@inputSubmit('_class -> "btn btn-success btn-lg btn-block", '_label -> "Sign in")
 			<a class="btn btn-link btn-block" href="javascript: history.go(-1)">Cancel</a>
 		}
+		
 	</div> <!-- /container -->
 	
 	<!-- Bootstrap core JavaScript -->

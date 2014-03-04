@@ -1,7 +1,7 @@
 package models.connection;
 
-import models.exception.InvalidConnectionException
 import org.joda.time.DateTime
+import exception.InvalidConnectionException
 
 abstract class Connection extends Connection_Base {
   
