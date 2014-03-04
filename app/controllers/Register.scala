@@ -1,15 +1,20 @@
 package controllers
 
+import java.util.Date
+import exception.HackerspaceAlreadyExistsException
+import scala.collection.JavaConversions._
+import models.Hackerspace
 import play.api._
-import play.api.mvc._
 import play.api.data._
+import play.api.data.Forms._
 import play.api.data.validation._
 import play.api.data.validation.Constraints._
-import play.api.data.Forms._
-//import models._
+import play.api.mvc._
 import views._
-
-import java.util.Date
+import pt.ist.fenixframework.FenixFramework
+import util.FenixFrameworkUtil._
+import play.Logger
+import exception.HackerspaceAlreadyExistsException
 
 object Register extends Controller {
   //Index
@@ -17,21 +22,28 @@ object Register extends Controller {
     Ok(html.register.index())
   }
   
-  //Hackerspace
+  /********************************************************************************\
+   *         _   _            _                                                   *
+   *        | | | | __ _  ___| | _____ _ __ ___ _ __   __ _  ___ ___  ___         *
+   *        | |_| |/ _` |/ __| |/ / _ \ '__/ __| '_ \ / _` |/ __/ _ \/ __|        *
+   *        |  _  | (_| | (__|   <  __/ |  \__ \ |_) | (_| | (_|  __/\__ \        *
+   *        |_| |_|\__,_|\___|_|\_\___|_|  |___/ .__/ \__,_|\___\___||___/        *
+   *                                           |_|                                *
+   *                                                                              *
+  \********************************************************************************/
   case class HackerspaceDTO(
-      username: String,
-      name: String,
+      name: String/*,
       password: String,
       email: String,
       location: String,
       GPS: String,
-      dateFounded: Date
+      dateFounded: Date*/
   )
   
   val hackerspaceForm: Form[HackerspaceDTO] = Form(
 	mapping(
-	  "username" -> nonEmptyText,
-	  "name" -> nonEmptyText,
+	  //"username" -> nonEmptyText,
+	  "name" -> nonEmptyText/*,
 	  "password" -> tuple(
         "main" -> nonEmptyText(minLength = 6),
         "confirm" -> nonEmptyText(minLength = 6)
@@ -39,30 +51,50 @@ object Register extends Controller {
 	  "email" -> email.verifying(nonEmpty),
 	  "location" -> nonEmptyText,
 	  "GPS" -> nonEmptyText,
-	  "dateFounded" -> date("dd-mm-yyyy")
-    ){
+	  "dateFounded" -> date("dd-mm-yyyy")*/
+    )(HackerspaceDTO.apply)(HackerspaceDTO.unapply)/*{
       // Binding: Create a Hacker from the mapping result (ignore the second password)
       (username, name, passwords, email, location, GPS, dateFounded) => HackerspaceDTO(username, name, passwords._1, email, location, GPS, dateFounded) 
     }{
       // Unbinding: Create the mapping values from an existing Hacker value
       hackerspaceDTO => Some(hackerspaceDTO.username, hackerspaceDTO.name, (hackerspaceDTO.password, hackerspaceDTO.password), hackerspaceDTO.email, hackerspaceDTO.location, hackerspaceDTO.GPS, hackerspaceDTO.dateFounded)
-    }
+    }*/
   )
   
   def hackerspace = Action {
     Ok(html.register.hackerspace(hackerspaceForm))
   }
-  def newHackerspace = Action {implicit request =>
-    hackerspaceForm.bindFromRequest.fold(
-      // Form has errors, redisplay it
-      errors => BadRequest(html.register.hackerspace(errors)),
-      
-      // We got a valid Hacker value, display the summary
-      hackerspaceDTO => Ok(html.register.index())
-    )
+  
+  def isValidHackerspaceName(name: String) = Action {
+    Ok(Hackerspace.isValidName(name).toString)    
   }
   
-  //Hacker
+  def newHackerspace = Action { implicit request ⇒
+    val form = hackerspaceForm.bindFromRequest
+    form.fold(
+      errors ⇒ BadRequest(html.register.hackerspace(errors)),
+      hackerspaceDTO ⇒ atomic[HackerspaceAlreadyExistsException, Hackerspace] {
+        new Hackerspace(hackerspaceDTO.name)
+      } match {
+        case Left(ex) ⇒ ex match {
+          case al: HackerspaceAlreadyExistsException ⇒ {
+            val formWithError = form.withError("name", "hackerspaceNameAlreadyTaken", form("name").value.getOrElse(""))
+            BadRequest(html.register.hackerspace(formWithError))
+          }
+          case _ ⇒ Ok("An error occured: " + ex.getMessage)
+        }
+        case Right(hackerspace) ⇒ Ok(html.register.index())
+      })
+  }
+  
+  /************************************************\
+   *        _   _            _                    *
+   *       | | | | __ _  ___| | _____ _ __        *
+   *       | |_| |/ _` |/ __| |/ / _ \ '__|       *
+   *       |  _  | (_| | (__|   <  __/ |          *
+   *       |_| |_|\__,_|\___|_|\_\___|_|          *
+   *                                              *  
+  \************************************************/
   case class HackerDTO(
       username: String,
       name: String,
@@ -104,14 +136,4 @@ object Register extends Controller {
       hackerDTO => Ok(html.register.index())
     )
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 }

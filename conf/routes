@@ -11,6 +11,7 @@ POST	/login						controllers.Login.submit
 # Register
 GET		/register/hackerspace		controllers.Register.hackerspace
 POST	/register/hackerspace		controllers.Register.newHackerspace
+GET		/register/isValid/:name		controllers.Register.isValidHackerspaceName(name: String)
 GET		/register/hacker			controllers.Register.hacker
 POST	/register/hacker			controllers.Register.newHacker
 GET		/register					controllers.Register.registerIndex

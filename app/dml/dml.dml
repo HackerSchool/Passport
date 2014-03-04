@@ -36,14 +36,14 @@ class User {
 
 class Party {
     String rri;
-    String fullname;    
+    String name;
+    String logoUrl;
 }
 
     class SocialNetwork extends Party {
     }
 
     class Hacker extends Party {
-        String hackername;
         DateTime dateOfBirth;
         String sex;
         DateTime dateJoined;
@@ -51,7 +51,6 @@ class Party {
     }
 
     class Hackerspace extends Party {
-        String logoUrl;
         String location;
         GPS gps;
         LocalDate dateFounded;
@@ -60,13 +59,11 @@ class Party {
 
     class Project extends Party{
         DateTime beginDate;
-        String logoUrl;
     }
 
     class Event extends Party{
         DateTime beginDate;
         DateTime endDate;
-        String logoUrl;
     }
 
 
@@ -89,9 +86,9 @@ relation KnownUsers {
     User playsRole users{ multiplicity *; }
 }
 
-relation KnownParties {
+relation KnownHackerspaces {
     .pt.ist.fenixframework.DomainRoot playsRole root;
-    Party playsRole parties { multiplicity *; }
+    Hackerspace playsRole hackerspaces { multiplicity *; }
 }
 
 relation KnownPassportInstances {
@@ -102,6 +99,11 @@ relation KnownConnections {
     .pt.ist.fenixframework.DomainRoot playsRole root;
     connection.Connection playsRole connections { multiplicity *; }
 }
+relation KnownParties {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Party playsRole parties { multiplicity *; }
+}
+
 /*Relations between the system components and user interface*/
 
 relation HackerUser {

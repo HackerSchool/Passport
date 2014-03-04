@@ -16,15 +16,14 @@
 		<h1>@test</h1>
 		
 		@form(action = routes.Register.newHackerspace(), true, 'id -> "newHackerspaceForm"){
-		    @inputText(newHackerspaceForm("username"))
-	  		@inputText(newHackerspaceForm("name"))
-	  		@inputPassword(newHackerspaceForm("password.main"))
+		    <!-- @inputText(newHackerspaceForm("username")) -->
+	  		@inputText(newHackerspaceForm("name"))	  		
+	  		<!-- @inputPassword(newHackerspaceForm("password.main"))
 	  		@inputPassword(newHackerspaceForm("password.confirm"))
 	  		@inputText(newHackerspaceForm("email"))
 	  		@inputText(newHackerspaceForm("location"))
 	  		@inputText(newHackerspaceForm("GPS"))
-	  		@inputDate(newHackerspaceForm("dateFounded"))
-	  		
+	  		@inputDate(newHackerspaceForm("dateFounded")) -->
 	  		
 	  		@inputSubmit(
 	  			'_label -> "Register")
