@@ -91,6 +91,22 @@ relation KnownHackerspaces {
     .pt.ist.fenixframework.DomainRoot playsRole root;
     Hackerspace playsRole hackerspaces { multiplicity *; }
 }
+relation KnownHackers {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Hacker playsRole hackers { multiplicity *; }
+}
+relation KnownEvents {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Event playsRole events { multiplicity *; }
+}
+relation KnownProjects {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    Project playsRole projects { multiplicity *; }
+}
+relation KnownSocialNetworks {
+    .pt.ist.fenixframework.DomainRoot playsRole root;
+    SocialNetwork playsRole socialNetworks { multiplicity *; }
+}
 
 relation KnownPassportInstances {
     .pt.ist.fenixframework.DomainRoot playsRole root;
@@ -99,10 +115,6 @@ relation KnownPassportInstances {
 relation KnownConnections {
     .pt.ist.fenixframework.DomainRoot playsRole root;
     connection.Connection playsRole connections { multiplicity *; }
-}
-relation KnownParties {
-    .pt.ist.fenixframework.DomainRoot playsRole root;
-    Party playsRole parties { multiplicity *; }
 }
 
 /*Relations between the system components and user interface*/

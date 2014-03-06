@@ -1,3 +1,3 @@
 package exception
 
-case class HackerspaceAlreadyExistsException(context: String) extends PassportException(context)
+class HackerspaceAlreadyExistsException(context: String) extends PassportException(context)
