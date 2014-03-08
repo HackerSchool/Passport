@@ -33,7 +33,7 @@ POST    /hackerspaces               controllers.Application.searchHackerspaces
 GET     /socialNetworkCreate        controllers.SocialNetworkManager.createForm
 GET		/socialNetworks				controllers.SocialNetworkManager.showAll
 GET		/socialNetwork/:id			controllers.SocialNetworkManager.show(id:Long)
-GET	     /socialNetworkEdit/:id       controllers.SocialNetworkManager.editForm(id: Long)
+GET	     /socialNetworkEdit/:name       controllers.SocialNetworkManager.editForm(name: String)
 POST     /socialNetworkCreate       controllers.SocialNetworkManager.create
 
 

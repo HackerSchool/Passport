@@ -9,13 +9,13 @@ import views._
 import java.util.Date
 import java.util.UUID
 import scala.util.Random
-import scala.collection.JavaConversions._
 import util.FenixFrameworkUtil
 import models.SocialNetwork
 import pt.ist.fenixframework.FenixFramework
 import models.Party
 import models.Party
 import util.FenixFrameworkUtil._
+import exception.DomainException
 
 object SocialNetworkManager extends Controller {
 
@@ -36,14 +36,10 @@ object SocialNetworkManager extends Controller {
       "id" -> of[Long])(SocialNetworkDTO.apply)(SocialNetworkDTO.unapply))
 
   def showAll = Action {
-    val socialNwk = FenixFramework.getDomainRoot().getSocialNetworksSet()
-    Logger.debug("ASDSGGNHg")
-    Logger.debug("orig siz: " + FenixFramework.getDomainRoot().getSocialNetworksSet().size())
-    Logger.debug("qrlqlknrengkrg")
-    val socialNwkList: List[SocialNetworkDTO] = (for (
-      s <- socialNwk.filter(p => p.isInstanceOf[SocialNetwork])
-    ) yield new SocialNetworkDTO(s.asInstanceOf[SocialNetwork]))(collection.breakOut)
-    // Logger.debug("Size of : " + socialNwkList.size)
+    val socialNwkList = atomic[List[SocialNetworkDTO]]{
+      (for (s <- SocialNetwork.getAll())
+    	yield new SocialNetworkDTO(s.asInstanceOf[SocialNetwork]))(collection.breakOut)
+    }
     Ok(html.socialNetwork.socialNetworks(socialNwkList))
   }
 
@@ -51,44 +47,33 @@ object SocialNetworkManager extends Controller {
     Ok(html.socialNetwork.socialNetworkForm(socialNetworkForm.fill(new SocialNetworkDTO("", "", 0))))
   }
 
-  def editForm(id: Long) = Action {
-    val socialNwk = atomic[SocialNetwork] {
-      val root = FenixFramework.getDomainRoot()
-      Logger.debug(root.toString())
-      val socNwks = root.getSocialNetworksSet()
-      val filteredSocNwks = socNwks.filter(_.getOid() == id)
-      Logger.debug("farties " + filteredSocNwks.toString)
-      Logger.debug("farties size: " + filteredSocNwks.size())
-      if (filteredSocNwks.size() != 1) {
-        throw new Exception()
-      }
-      filteredSocNwks.head
+  def editForm(name: String) = Action {
+    var dto = atomic[SocialNetworkDTO] {
+      val opt = SocialNetwork.getAllByName(name).headOption
+      if(opt.isDefined)
+    	  new SocialNetworkDTO(opt.get)
+      else
+        throw new DomainException("error")
     }
-    Logger.debug("RESULTADO: " + socialNwk.toString())
+    Ok(html.socialNetwork.socialNetworkForm(socialNetworkForm.fill(dto)))
 
-    Ok(html.socialNetwork.socialNetworkForm(socialNetworkForm.fill(new SocialNetworkDTO(socialNwk))))
   }
 
   def create = Action { implicit request =>
     socialNetworkForm.bindFromRequest.fold(
       errors => BadRequest(html.socialNetwork.socialNetworkForm(errors)),
-      socialNetworkDTO => {
-        val id = atomic[Long] {
-          val socialNet = new SocialNetwork(socialNetworkDTO.fullname, socialNetworkDTO.url)
-          Long2long(socialNet.getOid())
-        }
-        val newSocNwkDTO = SocialNetworkDTO(socialNetworkDTO.fullname, socialNetworkDTO.url, id)
+      socialNetworkDTO => atomic[Result] {
+        val socialNet = new SocialNetwork(socialNetworkDTO.fullname, socialNetworkDTO.url)
+        val newSocNwkDTO = SocialNetworkDTO(socialNetworkDTO.fullname, socialNetworkDTO.url, socialNet.getOid())
         Ok(html.socialNetwork.socialNetwork(newSocNwkDTO))
       })
   }
 
   def show(id: Long) = Action { implicit request =>
-
-    val socialNwk = atomic[SocialNetwork] { FenixFramework.getDomainRoot().getSocialNetworksSet().filter(_.getOid() == id).head }
-    Logger.debug("RESULTADO: " + socialNwk.toString())
-    val socNwkDTO = new SocialNetworkDTO(socialNwk)
-
-    Ok(html.socialNetwork.socialNetwork(socNwkDTO))
+    atomic[Result] {
+      val socialNwkDTO = new SocialNetworkDTO(SocialNetwork.getByOid(id).head)
+      Ok(html.socialNetwork.socialNetwork(socialNwkDTO))
+    }
   }
 
 }

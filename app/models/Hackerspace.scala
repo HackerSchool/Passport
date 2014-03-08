@@ -6,12 +6,25 @@ import scala.collection.JavaConversions._
 import util.FenixFrameworkUtil._
 import _root_.exception.HackerspaceAlreadyExistsException
 import pt.ist.fenixframework.consistencyPredicates.ConsistencyPredicate
-
+import scala.collection.JavaConversions._
 
 object Hackerspace {
+  private def getAll(): Set[Hackerspace] = {
+     FenixFramework.getDomainRoot().getHackerspacesSet().toIndexedSeq.toSet
+  }
+  
+  def getAllByName(name: String): Set[Hackerspace] = {
+   getAll().filter(_.getName() == name)
+  }
+  def getAllByRri(rri: String): Set[Hackerspace] = {
+    getAll().filter(_.getRri() == rri)
+  }
+  def getByOid(oid : Long): Set[Hackerspace] = {
+    getAll().filter(_.getOid() == oid)
+  }
+  
   def isValidName(name: String): Boolean = atomic {
-    val hackerspaces = FenixFramework.getDomainRoot().getHackerspacesSet()
-    hackerspaces.count(_.getName() == name) == 0
+    getAllByName(name).size == 0
   }
 }
 
