@@ -31,14 +31,14 @@ object SocialNetworkManager extends Controller {
 
   val socialNetworkForm: Form[SocialNetworkDTO] = Form(
     mapping(
-      "fullname" -> nonEmptyText,
-      "url" -> nonEmptyText,
+      "Social Network Name" -> nonEmptyText,
+      "Public URL" -> nonEmptyText,
       "id" -> of[Long])(SocialNetworkDTO.apply)(SocialNetworkDTO.unapply))
 
   def showAll = Action {
-    val socialNwkList = atomic[List[SocialNetworkDTO]]{
+    val socialNwkList = atomic[List[SocialNetworkDTO]] {
       (for (s <- SocialNetwork.getAll())
-    	yield new SocialNetworkDTO(s.asInstanceOf[SocialNetwork]))(collection.breakOut)
+        yield new SocialNetworkDTO(s.asInstanceOf[SocialNetwork]))(collection.breakOut)
     }
     Ok(html.socialNetwork.socialNetworks(socialNwkList))
   }
@@ -47,31 +47,27 @@ object SocialNetworkManager extends Controller {
     Ok(html.socialNetwork.socialNetworkForm(socialNetworkForm.fill(new SocialNetworkDTO("", "", 0))))
   }
 
-  def editForm(name: String) = Action {
+  def editForm(id: Long) = Action {
     var dto = atomic[SocialNetworkDTO] {
-      val opt = SocialNetwork.getAllByName(name).headOption
-      if(opt.isDefined)
-    	  new SocialNetworkDTO(opt.get)
-      else
-        throw new DomainException("error")
-    }
+    	new SocialNetworkDTO(SocialNetwork.getByOid(id))
+      }
     Ok(html.socialNetwork.socialNetworkForm(socialNetworkForm.fill(dto)))
-
   }
 
   def create = Action { implicit request =>
     socialNetworkForm.bindFromRequest.fold(
       errors => BadRequest(html.socialNetwork.socialNetworkForm(errors)),
-      socialNetworkDTO => atomic[Result] {
+      socialNetworkDTO => {val id = atomic[Long] {
         val socialNet = new SocialNetwork(socialNetworkDTO.fullname, socialNetworkDTO.url)
-        val newSocNwkDTO = SocialNetworkDTO(socialNetworkDTO.fullname, socialNetworkDTO.url, socialNet.getOid())
-        Ok(html.socialNetwork.socialNetwork(newSocNwkDTO))
+        socialNet.getOid()
+      }
+      Redirect("/socialNetwork/"+id)
       })
   }
 
   def show(id: Long) = Action { implicit request =>
     atomic[Result] {
-      val socialNwkDTO = new SocialNetworkDTO(SocialNetwork.getByOid(id).head)
+      val socialNwkDTO = new SocialNetworkDTO(SocialNetwork.getByOid(id))
       Ok(html.socialNetwork.socialNetwork(socialNwkDTO))
     }
   }

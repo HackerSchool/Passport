@@ -1,14 +1,14 @@
-@(socialNwksList : List[controllers.SocialNetworkManager.SocialNetworkDTO])
-@main("Socia lNetworks", "socialNetworks-link") {
+@(eventsList : List[controllers.EventManager.EventDTO])
+@main("Event", "events-link") {
     <div class="container">
-		<h3>Search Social Networks</h3>
+		<h3>Search Events</h3>
 		<form class="form" role="search">
 			<div class="input-group">
 				<input type="text" class="form-control" id="inputText" placeholder="Name or Url">
 		  		<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
 			</div>
 		</form>
-		<h3>Social Networks</h3>
+		<h3>Events</h3>
 		<div class="row">
 			<div class="col-lg-12">
 				<table class="table table-hover">
@@ -16,12 +16,12 @@
 						<tr><td>Name</td><td>URL</td><td></td></tr>
 					</thead>
 					<tbody>
-						@for(socNwk <-socialNwksList) {
+						@for(socNwk <-eventsList) {
 							<tr>
-							<td>@socNwk.fullname</td>
+							<td>@socNwk.name</td>
 							<td>@socNwk.url </td>
-							<td><a class="btn btn-primary btn-sm" role="button" href="/socialNetwork/@socNwk.id">Show</a>
-							<a class="btn btn-primary btn-sm" role="button" href="/socialNetworkEdit/@socNwk.id">Edit</a></td>
+							<td><a class="btn btn-primary btn-sm" role="button" href="/event/@socNwk.id">Show</a>
+							<a class="btn btn-primary btn-sm" role="button" href="/eventEdit/@socNwk.id">Edit</a></td>
 							</tr>
 						}
 					</tbody>

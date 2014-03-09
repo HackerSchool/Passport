@@ -33,9 +33,22 @@ POST    /hackerspaces               controllers.Application.searchHackerspaces
 GET     /socialNetworkCreate        controllers.SocialNetworkManager.createForm
 GET		/socialNetworks				controllers.SocialNetworkManager.showAll
 GET		/socialNetwork/:id			controllers.SocialNetworkManager.show(id:Long)
-GET	     /socialNetworkEdit/:name       controllers.SocialNetworkManager.editForm(name: String)
-POST     /socialNetworkCreate       controllers.SocialNetworkManager.create
+GET	    /socialNetworkEdit/:id     controllers.SocialNetworkManager.editForm(id: Long)
+POST    /socialNetworkCreate       controllers.SocialNetworkManager.create
 
+# Events
+GET     /eventCreate        		controllers.EventManager.createForm
+GET		/events						controllers.EventManager.showAll
+GET		/event/:id					controllers.EventManager.show(id:Long)
+GET	    /eventEdit/:id       		controllers.EventManager.editForm(id: Long)
+POST    /eventCreate       			controllers.EventManager.create
+
+# Project
+GET     /projectCreate        		controllers.ProjectManager.createForm
+GET		/projects					controllers.ProjectManager.showAll
+GET		/project/:id				controllers.ProjectManager.show(id:Long)
+GET	    /projectEdit/:id       		controllers.ProjectManager.editForm(id: Long)
+POST    /projectCreate       		controllers.ProjectManager.create
 
 # Event/Projects
 GET     /eventsProjects/:GUID		controllers.Application.showEventsProjects(GUID: String)

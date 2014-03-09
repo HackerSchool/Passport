@@ -1,4 +1,4 @@
-@(socialNetwork: controllers.SocialNetworkManager.SocialNetworkDTO)
+@(event: controllers.EventManager.EventDTO)
 
 @import helper.bootstrap._
 
@@ -10,12 +10,12 @@
     <script src="@routes.Assets.at("javascripts/bootstrap-datepicker.js")" type="text/javascript"></script>
 }
 
-@main("SocialNetwork", "socialnetwork-link", scripts) {
+@main("Event", "event-link", scripts) {
 	<div class="container">
-		<h3>Social Network : @socialNetwork.fullname</h3>
-			<p>Url : @socialNetwork.url</p>
-			<p>@socialNetwork.id</p>
-		    <a class="btn btn-primary btn-sm" role="button" href="/socialNetworkEdit/@socialNetwork.id">Edit</a></td>
+		<h3>Event : @event.name</h3>
+			<p>Url : @event.url</p>
+			<p>@event.id</p>
+		    <a class="btn btn-primary btn-sm" role="button" href="/eventEdit/@event.id">Edit</a></td>
 	</div>
 	
 }
