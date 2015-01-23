@@ -1,9 +1,13 @@
 language: scala
 scala:
-  - 2.11.5
-  - 2.10.4
+- 2.11.5
+- 2.10.4
 jdk:
-  - oraclejdk8
-  - oraclejdk7
-  - openjdk8
-  - openjdk7
+- oraclejdk8
+- oraclejdk7
+- openjdk7
+- openjdk6
+
+notifications:
+  slack:
+    secure: g/TqAfdBz3RHs+41CiyDIJUYcqvKt71uxzLGrdM6Gf/b8sZQJ0V0N5sBw7wVDLSvRkBU/P0X9Qpvc4RXSXDGiYmfvuofjglt1HzTCnYCKOCVtkh/nYPEi4YDTck7BoHoI80NqCPIuCIqMnGDgbPmSkC7VCwojropbcV0Pv+RHJA=
