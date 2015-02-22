@@ -1,11 +1,3 @@
 package models.connection
 
-import models.Hackerspace
-import models.Project
-import models.Hacker
-import models.Party
-
-class SpecialGuest(child: Party, parent: Party) extends Visit(child, parent) {
-
-    
-}
+case class SpecialGuest(id: Option[Long], _child: Long, _parent: Long) extends Guess

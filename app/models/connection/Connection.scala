@@ -1,25 +1,25 @@
-package models.connection;
+package models.connection
 
-import org.joda.time.DateTime
-import exception.InvalidConnectionException
-import pt.ist.fenixframework.FenixFramework
+import java.time.OffsetDateTime
 
-abstract class Connection extends Connection_Base {
-  
-  setRoot(FenixFramework.getDomainRoot())
-  setCreationDate(new DateTime())
-  setState(ConnectionState.UNINIALIZED)
- 
-  def init = {
-	  if (!isValidConnection)
-	  	throw new InvalidConnectionException("Cannont create connection")
-	  setStartDate(new DateTime())
-	  setState(ConnectionState.CREATED)
+import models.Party
+
+trait Connection {
+  var creationDate: OffsetDateTime = OffsetDateTime.now()
+  var state = ConnectionState.NotInitialized
+
+  def isValidConnection: Boolean
+
+  def init() = if (isValidConnection) {
+    creationDate = OffsetDateTime.now()
+    state = ConnectionState.Created
   }
 
-  def isValidConnection : Boolean
-  def verify : Boolean = {
-    setState(ConnectionState.VERIFIED)
-    return true
+  def parent: Set[Party] = ???
+  def child: Party = ???
+
+  def verify(): Boolean = {
+    state = ConnectionState.Verified
+    true
   }
 }

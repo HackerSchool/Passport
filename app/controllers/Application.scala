@@ -1,14 +1,9 @@
 package controllers
 
-import play.api._
+import controllers.EventManager._
 import play.api.mvc._
-import play.api.data._
-import play.api.data.Forms._
 import views._
-import java.util.Date
-import java.util.UUID
 import scala.util.Random
-import pt.ist.fenixframework.FenixFramework
 
 object Application extends Controller {
 
@@ -17,37 +12,31 @@ object Application extends Controller {
   }
   
   //Hackers
-  def showHacker(GUID: String) = Action {
-	Ok
-  }
+  def showHacker(GUID: String) = TODO
+
   def hackers = Action {
     Ok(html.hackers())
   }
-  def searchHackers = Action {
-    Ok
-  }
+
+  def searchHackers = TODO
   
   //Hackerspaces
-  def showHackerSpace(GUID: String) = Action {
-	Ok
-  }
+  def showHackerSpace(GUID: String) = TODO
+
   def hackerspaces = Action {
     Ok(html.hackerspaces())
   }
-  def searchHackerspaces = Action {
-    Ok
-  }
+
+  def searchHackerspaces = TODO
   
   //EventsProjects
-  def showEventsProjects(GUID: String) = Action {
-	Ok
-  }
+  def showEventsProjects(GUID: String) = TODO
+
   def eventsProjects = Action {
     Ok(html.eventsProjects())
   }
-  def searchEventsProjects = Action {
-    Ok
-  }
+
+  def searchEventsProjects = TODO
 
   //About
   def about = Action {

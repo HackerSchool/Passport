@@ -5,58 +5,58 @@
 GET     /                           controllers.Application.index
 
 # Login
-GET		/login						controllers.Login.index
-POST	/login						controllers.Login.submit
+GET		/login						            controllers.Login.index
+POST	/login						            controllers.Login.submit
 
 # Register
-GET		/register/hackerspace		controllers.Register.hackerspace
-POST	/register/hackerspace		controllers.Register.newHackerspace
-GET		/register/isValid/:name		controllers.Register.isValidHackerspaceName(name: String)
-GET		/register/hacker			controllers.Register.hacker
-POST	/register/hacker			controllers.Register.newHacker
-GET		/register					controllers.Register.registerIndex
+GET		/register/hackerspace		      controllers.Register.hackerspace
+POST	/register/hackerspace		      controllers.Register.newHackerspace
+GET		/register/isValid/:name		    controllers.Register.isValidHackerspaceName(name: String)
+GET		/register/hacker			        controllers.Register.hacker
+POST	/register/hacker			        controllers.Register.newHacker
+GET		/register					            controllers.Register.registerIndex
 
 # About
-GET		/about						controllers.Application.about
+GET		/about						            controllers.Application.about
 
 # Hackers
-GET     /hackers/:GUID				controllers.Application.showHacker(GUID: String)
+GET     /hackers/:GUID				      controllers.Application.showHacker(GUID: String)
 GET     /hackers                    controllers.Application.hackers
 POST    /hackers                    controllers.Application.searchHackers
 
 # Hackerspaces
-GET     /hackerspaces/:GUID			controllers.Application.showHackerSpace(GUID: String)
+GET     /hackerspaces/:GUID			    controllers.Application.showHackerSpace(GUID: String)
 GET     /hackerspaces               controllers.Application.hackerspaces
 POST    /hackerspaces               controllers.Application.searchHackerspaces
 
 # SocialNetworks
 GET     /socialNetworkCreate        controllers.SocialNetworkManager.createForm
-GET		/socialNetworks				controllers.SocialNetworkManager.showAll
-GET		/socialNetwork/:id			controllers.SocialNetworkManager.show(id:Long)
-GET	    /socialNetworkEdit/:id     controllers.SocialNetworkManager.editForm(id: Long)
-POST    /socialNetworkCreate       controllers.SocialNetworkManager.create
+GET		  /socialNetworks				      controllers.SocialNetworkManager.showAll
+GET		  /socialNetwork/:id			    controllers.SocialNetworkManager.show(id:Long)
+GET	    /socialNetworkEdit/:id      controllers.SocialNetworkManager.editForm(id: Long)
+POST    /socialNetworkCreate        controllers.SocialNetworkManager.create
 
 # Events
-GET     /eventCreate        		controllers.EventManager.createForm
-GET		/events						controllers.EventManager.showAll
-GET		/event/:id					controllers.EventManager.show(id:Long)
-GET	    /eventEdit/:id       		controllers.EventManager.editForm(id: Long)
-POST    /eventCreate       			controllers.EventManager.create
+GET     /eventCreate        		    controllers.EventManager.createForm
+GET		  /events						          controllers.EventManager.showAll
+GET		  /event/:id					        controllers.EventManager.show(id:Long)
+GET	    /eventEdit/:id       		    controllers.EventManager.editForm(id: Long)
+POST    /eventCreate       			    controllers.EventManager.create
 
 # Project
-GET     /projectCreate        		controllers.ProjectManager.createForm
-GET		/projects					controllers.ProjectManager.showAll
-GET		/project/:id				controllers.ProjectManager.show(id:Long)
-GET	    /projectEdit/:id       		controllers.ProjectManager.editForm(id: Long)
-POST    /projectCreate       		controllers.ProjectManager.create
+GET     /projectCreate        		  controllers.ProjectManager.createForm
+GET		  /projects					          controllers.ProjectManager.showAll
+GET		  /project/:id				        controllers.ProjectManager.show(id:Long)
+GET	    /projectEdit/:id       		  controllers.ProjectManager.editForm(id: Long)
+POST    /projectCreate       		    controllers.ProjectManager.create
 
 # Event/Projects
-GET     /eventsProjects/:GUID		controllers.Application.showEventsProjects(GUID: String)
+GET     /eventsProjects/:GUID		    controllers.Application.showEventsProjects(GUID: String)
 GET     /eventsProjects             controllers.Application.eventsProjects
 POST    /eventsProjects             controllers.Application.searchEventsProjects
 
 
-GET		/hacker/detail				controllers.Application.hackerDetail
+GET		  /hacker/detail				      controllers.Application.hackerDetail
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -1,20 +1,12 @@
 package controllers
 
 import java.util.Date
-import exception.HackerspaceAlreadyExistsException
-import scala.collection.JavaConversions._
 import models.Hackerspace
-import play.api._
 import play.api.data._
 import play.api.data.Forms._
-import play.api.data.validation._
 import play.api.data.validation.Constraints._
 import play.api.mvc._
 import views._
-import pt.ist.fenixframework.FenixFramework
-import util.FenixFrameworkUtil._
-import play.Logger
-import exception.HackerspaceAlreadyExistsException
 
 object Register extends Controller {
   //Index
@@ -69,23 +61,7 @@ object Register extends Controller {
     Ok(Hackerspace.isValidName(name).toString)    
   }
   
-  def newHackerspace = Action { implicit request ⇒
-    val form = hackerspaceForm.bindFromRequest
-    form.fold(
-      errors ⇒ BadRequest(html.register.hackerspace(errors)),
-      hackerspaceDTO ⇒ atomic[HackerspaceAlreadyExistsException, Hackerspace] {
-        new Hackerspace(hackerspaceDTO.name)
-      } match {
-        case Left(ex) ⇒ ex match {
-          case al: HackerspaceAlreadyExistsException ⇒ {
-            val formWithError = form.withError("name", "hackerspaceNameAlreadyTaken", form("name").value.getOrElse(""))
-            BadRequest(html.register.hackerspace(formWithError))
-          }
-          case _ ⇒ Ok("An error occured: " + ex.getMessage)
-        }
-        case Right(hackerspace) ⇒ Ok(html.register.index())
-      })
-  }
+  def newHackerspace = TODO
   
   /************************************************\
    *        _   _            _                    *
@@ -95,14 +71,7 @@ object Register extends Controller {
    *       |_| |_|\__,_|\___|_|\_\___|_|          *
    *                                              *  
   \************************************************/
-  case class HackerDTO(
-      username: String,
-      name: String,
-      password: String,
-      email: String,
-      birthday: Date,
-      sex: String
-  )
+  case class HackerDTO(username: String, name: String, password: String, email: String, birthday: Date, sex: String)
   
   val hackerForm: Form[HackerDTO] = Form(
 	mapping(

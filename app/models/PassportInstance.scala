@@ -1,7 +1,6 @@
 package models
 
-import pt.ist.fenixframework.FenixFramework
+case class PassportInstance(id: Option[Long], url: String, apiUrl: String) {
 
-class PassportInstance extends PassportInstance_Base {
-  	setRoot(FenixFramework.getDomainRoot())
+  def parties: Set[Party] = ???
 }

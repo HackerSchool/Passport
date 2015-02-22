@@ -1,7 +1,11 @@
 package models
 
-import pt.ist.fenixframework.FenixFramework
+trait Party {
+  def rri: String
+  def name: String
+  def logoUrl: String
 
-
-class Party extends Party_Base {  
+  def instance: PassportInstance = ???
+  def child: Party = ???
+  def parent: Party = ???
 }
