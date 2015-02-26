@@ -4,19 +4,19 @@ import play.api.data.format.Formats._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-import models.Event
+import models.party.Event
 
 object EventManager extends Controller {
-  case class EventDTO(name: String, url: String, id: Long) {
+  case class EventDTO(name: String, id: Long) {
     def this(event: Event) =
-      this(event.name, event.rri, event.id.get)
+      this(event.name, event.partyId)
   }
 
   val eventForm: Form[EventDTO] = Form(
     mapping(
       "Event Name" -> nonEmptyText,
-      "Public URL" -> nonEmptyText,
-      "id" -> of[Long])(EventDTO.apply)(EventDTO.unapply))
+      "id" -> of[Long]
+    )(EventDTO.apply)(EventDTO.unapply))
 
   def showAll = TODO
 

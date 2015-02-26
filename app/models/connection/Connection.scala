@@ -2,24 +2,13 @@ package models.connection
 
 import java.time.OffsetDateTime
 
-import models.Party
+abstract class Connection(val id: Option[Long], val child: Long, val parent: Long, val creationDate: OffsetDateTime,
+                          val endDate: Option[OffsetDateTime], val discriminator: String)
 
-trait Connection {
-  var creationDate: OffsetDateTime = OffsetDateTime.now()
-  var state = ConnectionState.NotInitialized
+object Connection {
+  def tupled(t: (Option[Long], Long, Long, OffsetDateTime, Option[OffsetDateTime], String)) = new Connection(t._1, t._2,
+    t._3, t._4, t._5, t._6){}
 
-  def isValidConnection: Boolean
-
-  def init() = if (isValidConnection) {
-    creationDate = OffsetDateTime.now()
-    state = ConnectionState.Created
-  }
-
-  def parent: Set[Party] = ???
-  def child: Party = ???
-
-  def verify(): Boolean = {
-    state = ConnectionState.Verified
-    true
-  }
+  def unapply(connection: Connection) = Some((connection.id, connection.child, connection.parent,
+    connection.creationDate, connection.endDate, connection.discriminator))
 }

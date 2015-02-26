@@ -29,13 +29,6 @@ GET     /hackerspaces/:GUID			    controllers.Application.showHackerSpace(GUID: 
 GET     /hackerspaces               controllers.Application.hackerspaces
 POST    /hackerspaces               controllers.Application.searchHackerspaces
 
-# SocialNetworks
-GET     /socialNetworkCreate        controllers.SocialNetworkManager.createForm
-GET		  /socialNetworks				      controllers.SocialNetworkManager.showAll
-GET		  /socialNetwork/:id			    controllers.SocialNetworkManager.show(id:Long)
-GET	    /socialNetworkEdit/:id      controllers.SocialNetworkManager.editForm(id: Long)
-POST    /socialNetworkCreate        controllers.SocialNetworkManager.create
-
 # Events
 GET     /eventCreate        		    controllers.EventManager.createForm
 GET		  /events						          controllers.EventManager.showAll

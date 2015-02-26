@@ -1,7 +1,7 @@
 package controllers
 
 import java.util.Date
-import models.Hackerspace
+import models.party.Hackerspace
 import play.api.data._
 import play.api.data.Forms._
 import play.api.data.validation.Constraints._
@@ -57,9 +57,7 @@ object Register extends Controller {
     Ok(html.register.hackerspace(hackerspaceForm))
   }
   
-  def isValidHackerspaceName(name: String) = Action {
-    Ok(Hackerspace.isValidName(name).toString)    
-  }
+  def isValidHackerspaceName(name: String) = TODO
   
   def newHackerspace = TODO
   

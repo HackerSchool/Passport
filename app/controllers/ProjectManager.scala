@@ -5,25 +5,25 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import views._
-import models.Project
+import models.party.Project
 
 object ProjectManager extends Controller {
 
-  case class ProjectDTO(name: String, url: String, id: Long) {
+  case class ProjectDTO(name: String, id: Long) {
     def this(project: Project) =
-      this(project.name, project.rri, project.id.get)
+      this(project.name, project.partyId)
   }
 
   val projectForm: Form[ProjectDTO] = Form(
     mapping(
       "Project Name" -> nonEmptyText,
-      "Public URL" -> nonEmptyText,
-      "id" -> of[Long])(ProjectDTO.apply)(ProjectDTO.unapply))
+      "id" -> of[Long]
+    )(ProjectDTO.apply)(ProjectDTO.unapply))
 
   def showAll() = TODO
 
   def createForm() = Action {
-    Ok(html.project.projectForm(projectForm.fill(new ProjectDTO("", "", 0))))
+    Ok(html.project.projectForm(projectForm.fill(new ProjectDTO("", 0))))
   }
 
   def editForm(id: Long) = TODO
