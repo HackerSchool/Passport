@@ -1,6 +1,9 @@
 Passport
 ========
 
+[![Build Status](https://travis-ci.org/HackerSchool-IST/Passport.svg?branch=development)](https://travis-ci.org/HackerSchool-IST/Passport)
+[![Codacy Badge](https://www.codacy.com/project/badge/e5180aac6dfb46918e0737ef902a7783)](https://www.codacy.com/public/magicknot/Passport)
+
 Setting up the work environment
 -------------------------------
 

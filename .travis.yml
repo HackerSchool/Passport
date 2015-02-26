@@ -1,9 +1,16 @@
 language: scala
+
 scala:
-- 2.11.5
+  - 2.11.5
+
 jdk:
-- oraclejdk8
+  - oraclejdk8
 
 notifications:
   slack:
     secure: g/TqAfdBz3RHs+41CiyDIJUYcqvKt71uxzLGrdM6Gf/b8sZQJ0V0N5sBw7wVDLSvRkBU/P0X9Qpvc4RXSXDGiYmfvuofjglt1HzTCnYCKOCVtkh/nYPEi4YDTck7BoHoI80NqCPIuCIqMnGDgbPmSkC7VCwojropbcV0Pv+RHJA=
+
+services: mysql
+
+before_script:
+  - mysql -e 'create database passport_test;'
